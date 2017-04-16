@@ -1,5 +1,16 @@
 # time-machine-store
 
+# Compiling
+1. Navigate to .cabal root dir, eg Chapter2
+2. cabal configure (only needs to be ran once)
+3. cabal build
+
+# Adding new module to project
+1. Choose a name for the module, for example A.B.C.
+2. Create a folder for each component of its name but the last one, in this case a folder A and inside a folder B.
+3. Create a file with the same name of the last component ending in .hs (here C.hs) and write the module declaration we’ve seen above. ```module Chapter2.Section2.Example where```.
+4. Tell Cabal to include the file in your project, under ```exposed-modules``` or ```other-modules```.
+
 # Notes
 
 ## Numbers
