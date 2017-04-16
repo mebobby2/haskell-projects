@@ -54,7 +54,29 @@ A first guess about the reason may lead you to think about indentation-sensitive
 * In an if block, the lines for then and else must be indented the same way.
 * In a let or a where block, all local bindings must start in the same position.
 
+## Tuples
+Haskell provides tuples to group a fixed number of components of different types and lists to contain an unlimited number of elements of a homogeneous type. Homogeneous means elements inside tuples can be of different type.
+
+## ADT
+The most basic kind of data types that you can create in Haskell are called algebraic data types (or ADTs for short) and will be the focus of this section. An ADT is defined by two pieces of data:
+* A name for the type that will be used to represent its values,
+* A set of constructors that are used to create new values. These constructors may have
+arguments that will hold values of the specified types.
+
+Some insights of ADTs:
+* If you tried to create a completely new ADT, for example named Client2, but you used
+the same constructor names, you will get a build error. This is because inside a module all constructors must have different names. If you think about it, it’s sensible to ask for that condition, because otherwise the compiler wouldn’t be able to distinguish which type you are willing to create,
+* Data types and constructor names live in different worlds. That means that it is possible to create a constructor with the same names as a data type. Indeed, it’s a common convention for one-alternative types, such as Person, to have the two names coincide,
+* For being able to use the default deriving functionality, all types used inside another one must be showable. For example, if you didn’t include deriving Show in Person, a compilation error will be signaled.
+
+## Capitalization in Haskell
+One of the special characteristics of haskell syntax is that names given by the user must follow some capitalization rules. here is a brief summary of the conventions:
+* Functions, parameters and bindings must start with a lowercase letter. in case of an operator name, it must not start with :.
+* types, constructors, type classes and kinds must start with an uppercase letter. if using an operator name, it must start with :.
+
+
+
 # Upto
 
-Page 29
-Returning More than One Value
+Page 33
+Pattern Matching
