@@ -74,7 +74,9 @@ One of the special characteristics of haskell syntax is that names given by the 
 * Functions, parameters and bindings must start with a lowercase letter. in case of an operator name, it must not start with :.
 * types, constructors, type classes and kinds must start with an uppercase letter. if using an operator name, it must start with :.
 
+# Book source code
 
+https://github.com/apress/beg-haskell
 
 # Upto
 
