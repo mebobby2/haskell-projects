@@ -1,4 +1,4 @@
-# Revision history for chapter2
+# Revision history for time-machine-store
 
 ## 0.1.0.0  -- YYYY-mm-dd
 
