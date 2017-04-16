@@ -46,6 +46,14 @@ Lists can contain other lists as elements (or to any level of nesting). As [t] a
 ## Number precision
 The usual warnings about comparison of floating-point values apply here. Computers are not able to represent with exact precision all the values, so you may find that equalities that you expect not to hold actually do. For example, in my system the expression (4.00000000000000003 - 4) == 0 evaluates to True.
 
+## Local bindings
+Gives name to an expression to be used in a larger one. There are two kinds of binding constructs in Haskell: let and where. In both cases a binding is introduced by name = expression. The difference lies in the position over the main expression: let introduces bindings before the main expression, and must end with the in keyword. On the other hand where does so after the expression.
+
+## Indentation
+A first guess about the reason may lead you to think about indentation-sensitive languages like Python. However, Haskell uses a different solution, called layout. In a layout-based syntax how a line is indented isn’t as important as the fact that all elements in the same block start in the same column. For example:
+* In an if block, the lines for then and else must be indented the same way.
+* In a let or a where block, all local bindings must start in the same position.
+
 # Upto
 
 Page 29
