@@ -5,6 +5,11 @@
 2. cabal configure (only needs to be ran once)
 3. cabal build
 
+# Loading Code REPL
+1. ```ghci``` from root of project.
+2. ```:l src/Chapter2/SimpleFunctions.hs``` load module.
+3. ```firstOrEmpty []``` call function.
+
 # Adding new module to project
 1. Choose a name for the module, for example A.B.C.
 2. Create a folder for each component of its name but the last one, in this case a folder A and inside a folder B.
