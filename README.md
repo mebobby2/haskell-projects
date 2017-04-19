@@ -87,6 +87,7 @@ How does Haskell evaluate this expression?
 In Haskell, function application has precedence over operators. ```reverse2 tail_results``` is a function application whereas ```+++``` is an operator application. Hence we evaluate ```reverse2 tail_results``` first. Lets put the results into a temporary binding called reverse_tail_results
 
 3. reverse_tail_results +++ [head list]
+
 ```[head list]``` is also a function application, so it gets evaluated before the infix operator ```+++```. Lets put the results into a temporary binding called [head_list]
 
 4. reverse_tail_results +++ [head_list]
