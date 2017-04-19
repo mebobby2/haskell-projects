@@ -74,11 +74,47 @@ One of the special characteristics of haskell syntax is that names given by the 
 * Functions, parameters and bindings must start with a lowercase letter. in case of an operator name, it must not start with :.
 * types, constructors, type classes and kinds must start with an uppercase letter. if using an operator name, it must start with :.
 
+## Pattern matching
+I strongly emphasize the fact that pattern matching does not backtrack when something goes wrong in the body of a match. this is important to remember, especially if you are coming from a logic programming background in which unification with backtracking is the norm.
+
+Example:
+```
+f :: Client -> String
+f client = case client of
+             Company _ _ (Person name _ _) "Boss" -> name ++ " is the boss"
+             _                                  -> "There is no boss"
+```
+
+and
+
+```
+g :: Client -> String
+g client = case client of
+             Company _ _ (Person name _ _) pos ->
+               case pos of "Boss" -> name ++ " is the boss"
+             _                               -> "There is no boss"
+```
+
+are not equilvalent.
+
+```
+ f (Company "A" 5 (Person "John" "Jefferson" Male) "Director")
+ "There is no boss"
+
+ g (Company "A" 5 (Person "John" "Jefferson" Male) "Director")
+ "*** Exception: Non-exhaustive patterns in case
+```
+
+When the value is given to f, the first pattern does not match, because "Director" is not equal to "Boss". So the system goes into the second black-hole match and sees that there is no boss. However, on g it first matches into being a Company, which the value satisfies, and in this point it enters the body of the match and forgets about other alternatives. Then, the inner match fails, raising the exception.
+
+
+
+
 # Book source code
 
 https://github.com/apress/beg-haskell
 
 # Upto
 
-Page 33
-Pattern Matching
+Page 36
+these exercises focus on pattern matching on data types defined by you.
