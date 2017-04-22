@@ -22,6 +22,19 @@ data Model = Model Integer deriving Show
 data TimeMachine = TimeMachine String Manufacturer Model Bool Double
                  deriving Show
 
+--IndividualR { person = PersonR { lastName = "Smith", firstName = "John" } }
+--GovOrgR "NATO"
+data ClientR = GovOrgR { clientRName :: String }
+             | CompanyR { clientRName :: String
+                        , companyId :: Integer
+                        , person :: PersonR
+                        , duty :: String }
+             | IndividualR { person :: PersonR }
+             deriving Show
+data PersonR = PersonR { firstName :: String
+                       , lastName :: String
+                       } deriving Show
+
 --clientName :: Client -> String
 --clientName client  = case client of
 --                      GovOrg name -> name

@@ -139,11 +139,16 @@ There is still some repetition in this code: I am matching on y:zs just to later
 sorted (x : r@(y:_)) = x < y && sorted r
 ```
 
+## Records
+The concept of a data structure that fields which can be accessed by name does exist in Haskell. Records make accessing or updating part of a structure much easier than otherwise. Records are defined using data declarations, but instead of just using a type for each parameter, we write parameter name :: parameter type. These declarations are the only exception to the layout rule: we always need to write the set of fields between { and } and to separate them by commas.
+
+Field names are also used to create special functions that access those particular fields.
+
 # Book source code
 
 https://github.com/apress/beg-haskell
 
 # Upto
 
-Page 41
-In most programming languages you can find the idea of a field as something that holds a value in a larger structure
+Page 42
+As these functions will be automatically created, Haskell enforces two extra restrictions on field names:
