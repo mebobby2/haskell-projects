@@ -1,3 +1,5 @@
+{-# LANGUAGE ViewPatterns #-}
+
 module Chapter2.DataTypes where
 
 -- c = Company "Comware" 3 (Person "Bobby" "Lei" Male) "CEO"
@@ -44,3 +46,16 @@ companyName client = case client of
                       _                  -> Nothing
 
 --let Just name = companyName client
+
+responsibility :: Client -> String
+responsibility (Company _ _ _ r) = r
+responsibility _                 = "Unknown"
+
+specialClient :: Client -> Bool
+specialClient (clientName -> "Mr. Alejandro") = True
+specialClient (responsibility -> "Director")  = True
+specialClient _                               = False
+
+
+
+

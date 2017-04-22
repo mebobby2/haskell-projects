@@ -145,5 +145,5 @@ https://github.com/apress/beg-haskell
 
 # Upto
 
-Page 40
-Sometimes you want to look for patterns in a value, but in some way they are not directly encoded. So you need to
+Page 41
+In most programming languages you can find the idea of a field as something that holds a value in a larger structure
