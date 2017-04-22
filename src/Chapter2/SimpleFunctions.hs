@@ -3,10 +3,14 @@ module Chapter2.SimpleFunctions where
 firstOrEmpty :: [[Char]] -> [Char]
 firstOrEmpty lst = if not (null lst) then head lst else "empty"
 
+--(+++) :: [a] -> [a] -> [a]
+--lst1 +++ lst2 = if null lst1 {- check emptiness -}
+--                then lst2 -- base case
+--                else (head lst1) : (tail lst1 +++ lst2)
+
 (+++) :: [a] -> [a] -> [a]
-lst1 +++ lst2 = if null lst1 {- check emptiness -}
-                then lst2 -- base case
-                else (head lst1) : (tail lst1 +++ lst2)
+[]     +++ list2 = list2
+(x:xs) +++ list2 = x:(xs +++ list2)
 
 reverse2 :: [a] -> [a]
 reverse2 list = if null list
@@ -21,3 +25,8 @@ maxmin list = let h = head list
                       where t = maxmin (tail list)
                             t_max = fst t
                             t_min = snd t
+
+sorted :: [Integer] -> Bool
+sorted [] = True
+sorted [_] = True
+sorted (x : r@(y:_)) = x < y && sorted r

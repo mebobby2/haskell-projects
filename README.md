@@ -128,6 +128,16 @@ In Haskell, function application has precedence over operators. ```reverse2 tail
 
 ```+++``` is an infix operator, meaning it can be written as ```+++ reverse_tail_results [head_list]```. So the final evaluation is a function application of ```+++``` with two arguments reverse_tail_results and [head_list].
 
+## as patterns
+```
+sorted (x:y:zs) = x < y && sorted (y:zs)
+```
+
+There is still some repetition in this code: I am matching on y:zs just to later reconstruct it. This sequence of checking whether some value conforms to some pattern, but later to use the value as a whole and not its components, is quite common in Haskell code. For that reason, Haskell introduces a syntactic form referred to by the term as patterns. The as patterns allows you to bind some value in the match, while at the same time allowing you to match on inner components of that value.
+
+```
+sorted (x : r@(y:_)) = x < y && sorted r
+```
 
 # Book source code
 
