@@ -75,6 +75,9 @@ specialMultiples n
   | multipleOf n 5 = show n ++ " is a multiple of 5"
   | otherwise      = show n ++ " is a beautiful number"
 
+--unzip :: [(Int,Int)] -> ([Int], [Int])
+unzip2 [] = ()
+unzip2 a = (1,2)
 
 
 

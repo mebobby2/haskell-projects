@@ -145,5 +145,8 @@ https://github.com/apress/beg-haskell
 
 # Upto
 
-Page 36
-these exercises focus on pattern matching on data types defined by you.
+Page 40
+Sometimes you want to look for patterns in a value, but in some way they are not directly encoded. So you need to
+
+before that:
+write the unzip function in exercise 2-6
