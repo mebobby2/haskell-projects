@@ -59,3 +59,25 @@ ifibonacci n | otherwise = let (Just f1, Just f2) = (ifibonacci (n-1), ifibonacc
 binom _ 0          = 1
 binom x y | x == y = 1
 binom n k          = (binom (n-1) (k-1)) + (binom (n-1) k)
+
+multipleOf :: Integer -> Integer -> Bool
+multipleOf x y = (mod x y) == 0
+
+--specialMultiples :: Integer -> String
+--specialMultiples n | multipleOf n 2 = show n ++ " is a multiple of 2"
+--specialMultiples n | multipleOf n 3 = show n ++ " is a multiple of 3"
+--specialMultiples n | multipleOf n 5 = show n ++ " is a multiple of 5"
+--specialMultiples n | otherwise      = show n ++ " is a beautiful number"
+
+specialMultiples n
+  | multipleOf n 2 = show n ++ " is a multiple of 2"
+  | multipleOf n 3 = show n ++ " is a multiple of 3"
+  | multipleOf n 5 = show n ++ " is a multiple of 5"
+  | otherwise      = show n ++ " is a beautiful number"
+
+
+
+
+
+
+
