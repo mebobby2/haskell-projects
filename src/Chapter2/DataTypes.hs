@@ -29,6 +29,9 @@ data TimeMachine = TimeMachine String Manufacturer Model Bool Double
 
 --IndividualR { person = PersonR { lastName = "Smith", firstName = "John" } }
 --GovOrgR "NATO"
+
+--p = PersonR {firstName = "Bobby", lastName = "Lei"}
+--p2 = p {lastName = "Ko"} Updates lastName to Ko
 data ClientR = GovOrgR { clientRName :: String }
              | CompanyR { clientRName :: String
                         , companyId :: Integer
