@@ -144,11 +144,33 @@ The concept of a data structure that fields which can be accessed by name does e
 
 Field names are also used to create special functions that access those particular fields.
 
+## ($)
+
+```
+($) :: (a -> b) -> a -> b
+f $ a = f a
+
+```
+
+Why is this ($) function useful at all? At first glance, it seems like a rather cumbersome way to apply a function to some arguments, given that that is the main use of functions. But apart from this definition, Haskell gives a very low precedence to ($), so both sides of this operator will be evaluated before f is applied to a. Therefore, we can omit a lot of parenthesis when using ($). This is very common in Haskell. For example, the following:
+
+```
+maximum (map succ [1, 2, 3])
+```
+
+Can be written as :
+
+```
+maximum $ map succ [1, 2, 3]
+```
+
+
+
 # Book source code
 
 https://github.com/apress/beg-haskell
 
 # Upto
 
-Page 42
-As these functions will be automatically created, Haskell enforces two extra restrictions on field names:
+Page 52
+Anonymous Functions
