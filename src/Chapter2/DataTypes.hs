@@ -1,5 +1,6 @@
 {-# LANGUAGE ViewPatterns #-}
 {-# LANGUAGE NamedFieldPuns #-}
+{-# LANGUAGE RecordWildCards #-}
 
 module Chapter2.DataTypes where
 
@@ -76,9 +77,9 @@ specialClient _                               = False
 --greet GovOrgR {}                                          = "Welcome"
 
 greet :: ClientR -> String
-greet IndividualR { person = PersonR { firstName } } = "Hi, " ++ firstName
-greet CompanyR { clientRName }                       = "Hello, " ++ clientRName
-greet GovOrgR {}                                     = "Welcome"
+greet IndividualR { person = PersonR { .. } } = "Hi, " ++ firstName
+greet CompanyR { .. }                         = "Hello, " ++ clientRName
+greet GovOrgR {}                              = "Welcome"
 
 
 
