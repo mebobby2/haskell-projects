@@ -2,7 +2,10 @@
 {-# LANGUAGE NamedFieldPuns #-}
 {-# LANGUAGE RecordWildCards #-}
 
+
 module Chapter2.DataTypes where
+
+import Data.Char
 
 -- c = Company "Comware" 3 (Person "Bobby" "Lei" Male) "CEO"
 -- g = GovOrg "Nasa"
@@ -81,5 +84,8 @@ greet IndividualR { person = PersonR { .. } } = "Hi, " ++ firstName
 greet CompanyR { .. }                         = "Hello, " ++ clientRName
 greet GovOrgR {}                              = "Welcome"
 
-
+nameInCapitals :: PersonR -> PersonR
+nameInCapitals p@(PersonR { firstName = initial:rest }) = let newName = (toUpper initial):rest
+                                                          in p { firstName = newName }
+nameInCapitals p@(PersonR {firstName = ""})           = p
 
