@@ -1,4 +1,5 @@
 {-# LANGUAGE ViewPatterns #-}
+{-# LANGUAGE NamedFieldPuns #-}
 
 module Chapter2.DataTypes where
 
@@ -69,11 +70,15 @@ specialClient (clientName -> "Mr. Alejandro") = True
 specialClient (responsibility -> "Director")  = True
 specialClient _                               = False
 
-greet :: ClientR -> String
-greet IndividualR { person  = PersonR { firstName = fn }} = "Hi, " ++ fn
-greet CompanyR { clientRName = c }                        = "Hello, " ++ c
-greet GovOrgR {}                                          = "Welcome"
+--greet :: ClientR -> String
+--greet IndividualR { person  = PersonR { firstName = fn }} = "Hi, " ++ fn
+--greet CompanyR { clientRName = c }                        = "Hello, " ++ c
+--greet GovOrgR {}                                          = "Welcome"
 
+greet :: ClientR -> String
+greet IndividualR { person = PersonR { firstName } } = "Hi, " ++ firstName
+greet CompanyR { clientRName }                       = "Hello, " ++ clientRName
+greet GovOrgR {}                                     = "Welcome"
 
 
 
