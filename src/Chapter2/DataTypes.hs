@@ -69,6 +69,11 @@ specialClient (clientName -> "Mr. Alejandro") = True
 specialClient (responsibility -> "Director")  = True
 specialClient _                               = False
 
+greet :: ClientR -> String
+greet IndividualR { person  = PersonR { firstName = fn }} = "Hi, " ++ fn
+greet CompanyR { clientRName = c }                        = "Hello, " ++ c
+greet GovOrgR {}                                          = "Welcome"
+
 
 
 
