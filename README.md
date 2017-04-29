@@ -164,6 +164,12 @@ Can be written as :
 maximum $ map succ [1, 2, 3]
 ```
 
+## Anonymous Functions
+
+not all forms of regular function declarations are allowed when used anonymously. Anonymous functions don’t have a name, so they cannot call themselves, thus forbidding recursion. Furthermore, only one pattern can be matched. So if you want to match several patterns, you must resort to a case statement.
+
+When a function encloses the values from the surrounding environment along with the body, these functions are usually known as closures in almost all languages supporting functional features.
+
 
 
 # Book source code
