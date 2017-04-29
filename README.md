@@ -250,5 +250,5 @@ https://github.com/apress/beg-haskell
 
 # Upto
 
-Page 52
-Anonymous Functions
+Page 54
+Once you know about the possibility of partially applying functions, it’s time to look more deeply into the meaning of the function types as they are written
