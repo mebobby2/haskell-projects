@@ -170,6 +170,58 @@ not all forms of regular function declarations are allowed when used anonymously
 
 When a function encloses the values from the surrounding environment along with the body, these functions are usually known as closures in almost all languages supporting functional features.
 
+## Understanding point free style
+
+```
+double list = map (\x -> x * 2) list
+```
+
+Can have the ```list``` argument omitted because ```list``` is in the end of both parameter lists. So, it can be written as:
+
+```
+double = map (\x -> x * 2)
+```
+
+Currying makes omitted the arguments possible. This is how:
+
+1. map function has type:
+
+```
+map :: (a -> b) -> [a] -> [b]
+```
+
+2. The annoymous func ```(\x -> x * 2)``` has type:
+
+```
+(\x -> x * 2) :: Integer -> Integer
+```
+
+3. We now partially apply the annoymous func to map, since the annoymous func is map's first argument. The partially applied map func now looks like:
+
+```
+map (\x -> x * 2)
+```
+
+Which because of automatic currying, returns another function which takes lesser arguments. The type of this curried function is:
+
+
+```
+map (\x -> x * 2) :: [Integer] -> [Integer]
+```
+
+4. Now you can call this current function like this:
+
+```
+curried = map (\x -> x * 2)
+curried [2,3,4]
+```
+
+And knowing this, you can just change the double to return this curried function, like this:
+
+```
+double = map (\x -> x * 2)
+```
+
 
 
 # Book source code

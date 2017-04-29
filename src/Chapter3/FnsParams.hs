@@ -28,3 +28,7 @@ filterANumber n = \x -> x == n
 filterNot :: (Integer -> Bool) -> [Integer] -> [Integer]
 filterNot f [item] =  if not (f item) then [item] else []
 filterNot f (x:xs) = filterNot f [x] ++ filterNot f xs
+
+--double list = map (\x -> x * 2) list
+--double      = \list -> map (\x -> x * 2) list
+double = map (\x -> x * 2)
