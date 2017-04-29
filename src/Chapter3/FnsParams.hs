@@ -20,3 +20,11 @@ sayHello names = map (\case "Bobby" -> "Hello, writer"
 --map (multiplyByN 5) [1,2,3]
 multiplyByN :: Integer -> (Integer -> Integer)
 multiplyByN n = \x -> n*x
+
+--filter (filterANumber 2) [1,2,3,4,2,5]
+filterANumber :: Integer -> (Integer -> Bool)
+filterANumber n = \x -> x == n
+
+filterNot :: (Integer -> Bool) -> [Integer] -> [Integer]
+filterNot f [item] =  if not (f item) then [item] else []
+filterNot f (x:xs) = filterNot f [x] ++ filterNot f xs
