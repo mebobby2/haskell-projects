@@ -222,6 +222,26 @@ And knowing this, you can just change the double to return this curried function
 double = map (\x -> x * 2)
 ```
 
+5. However, following this path of partial application, we can apply it to the annoymous block ```\x -> x * 2```. We partially the number 2 to the function ```*```. And we get the curried function:
+
+```
+(*2)
+```
+
+Which can be called like this:
+
+```
+curried = (*2)
+curried 4
+```
+
+6. From the previous step, we know that the curried function ```(*2)``` is equilvalent to the annoymous block ```\x -> x * 2```.
+And so, the double function's definition can be further reduced to:
+
+```
+double = map (*2)
+```
+
 
 
 # Book source code
