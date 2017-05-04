@@ -242,7 +242,25 @@ And so, the double function's definition can be further reduced to:
 double = map (*2)
 ```
 
+Once you know about the possibility of partially applying functions, it’s time to look more deeply into the meaning of the function types as they are written. First of all, the -> symbol binds to the right. That is, the type a -> b -> c -> d is a prettier, but equivalent, version of a -> (b -> (c -> d)). So, at its core, every function with more than one parameter is just a function that takes one parameter and returns a closure with one parameter less, which may indeed consume another parameter and so on, until we reach a non-function type.
 
+Partial application encourages a programming style where functions are combined without ever mentioning their parameters. This is called point-free style (because in mathematics, parameters to functions are called points).
+
+## Function composition
+Is when the period applies one function after the other. For example, following is how to write function f applied to the output from g:
+
+```
+f . g = \x -> f (g x)
+```
+
+## Currying
+Functions that take a sequence of arguments are called the curried versions of those that take a tuple. I’ll stress the subtle difference: the not curried version of a function only takes one argument, but it is a tuple, so in one value it holds more than one piece of information.
+
+Usually we prefer these curried versions, because we can partially applicate them. But sometimes an uncurried version is also interesting to consider. For example, say you are given a list of pairs of numbers, and you want to get the list of the maximums of pairs. You cannot directly use map max, because max requires two arguments. The solution then is to curry the function before application:
+
+```
+map (uncurry max) [(1,2),(2,1),(3,4)]
+```
 
 # Book source code
 
@@ -251,4 +269,5 @@ https://github.com/apress/beg-haskell
 # Upto
 
 Page 54
-Once you know about the possibility of partially applying functions, it’s time to look more deeply into the meaning of the function types as they are written
+Once yo
+u know about the possibility of partially applying functions, it’s time to look more deeply into the meaning of the function types as they are written

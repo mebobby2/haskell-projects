@@ -32,3 +32,29 @@ filterNot f (x:xs) = filterNot f [x] ++ filterNot f xs
 --double list = map (\x -> x * 2) list
 --double      = \list -> map (\x -> x * 2) list
 double = map (\x -> x * 2)
+
+--duplicateOdds list = map (*2) $ filter odd list
+duplicateOdds = map (*2) . filter odd
+
+--(uncurry max) (3,2)
+--map (uncurry max) [(1,2),(2,1),(3,4)]
+uncurry2 :: (a -> b -> c) -> (a,b) -> c
+uncurry2 f = \(x,y) -> f x y
+
+curry2 :: ((a,b) -> c) -> a -> b -> c
+curry2 f = \x y -> f (x, y)
+
+--(sqrt *** atan) (4, 3)
+(***) :: (a -> b) -> (c -> d) -> ((a,c) -> (b,d))
+f *** g = \(x,y) -> (f x, g y)
+
+--(sqrt *** atan) (duplicate 4)
+duplicate :: a -> (a,a)
+duplicate x = (x,x)
+
+
+--3x + 7(x + 2)
+formula1 :: Integer -> Integer
+formula1 = uncurry2 (+) . ( ((*7) . (+2)) *** (*3) ) . duplicate
+
+
