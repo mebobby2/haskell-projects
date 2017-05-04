@@ -1,4 +1,4 @@
-module Chapter2.DefaultValues where
+module Chapter2.DefaultValues (ConnOptions(), connDefault) where
 
 data ConnType = TCP | UDP
 data UseProxy = NoProxy | Proxy String

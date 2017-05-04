@@ -268,6 +268,5 @@ https://github.com/apress/beg-haskell
 
 # Upto
 
-Page 54
-Once yo
-u know about the possibility of partially applying functions, it’s time to look more deeply into the meaning of the function types as they are written
+Page 61
+Diving into Lists
