@@ -262,11 +262,19 @@ Usually we prefer these curried versions, because we can partially applicate the
 map (uncurry max) [(1,2),(2,1),(3,4)]
 ```
 
+## folds
+The name foldr is a reminder of the algorithm the function implements. It is a fold which associates to the right. That is, the innermost parenthesis will be found in the right side of the expression. Similarly you can build a fold that associates to the left, which is included in the Haskell Platform as foldl.
+
+```
+foldr :: (a -> b -> b) -> b -> [a] -> b
+foldl :: (a -> b -> a) -> a -> [b] -> a
+```
+
 # Book source code
 
 https://github.com/apress/beg-haskell
 
 # Upto
 
-Page 61
-Diving into Lists
+Page 66
+Lists and Predicates
