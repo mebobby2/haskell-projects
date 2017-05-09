@@ -10,6 +10,8 @@
 2. ```:l src/Chapter2/SimpleFunctions.hs``` load module.
 3. ```firstOrEmpty []``` call function.
 
+## If need to load other modules from within the module u are manually loading:
+
 4. If your haskell file contains imports of other modules, you need to tell ghci where to find your source files. Use the command ```:set -isrc``` from inside the ghci console.
 5. Or if you prefer, you can use ```cabal repl``` to start ghci. It will take into account any additional dependencies installed by cabal install your local or sandbox package repository.
 
