@@ -10,6 +10,9 @@
 2. ```:l src/Chapter2/SimpleFunctions.hs``` load module.
 3. ```firstOrEmpty []``` call function.
 
+4. If your haskell file contains imports of other modules, you need to tell ghci where to find your source files. Use the command ```:set -isrc``` from inside the ghci console.
+5. Or if you prefer, you can use ```cabal repl``` to start ghci. It will take into account any additional dependencies installed by cabal install your local or sandbox package repository.
+
 # Adding new module to project
 1. Choose a name for the module, for example A.B.C.
 2. Create a folder for each component of its name but the last one, in this case a folder A and inside a folder B.
@@ -278,5 +281,3 @@ https://github.com/apress/beg-haskell
 
 Page 67
 Its counterpart is takeWhile, which takes the initial elements
-
-before that: check why Lists.hs cannot load ParamPoly.hs module
