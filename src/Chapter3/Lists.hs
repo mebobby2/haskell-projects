@@ -16,6 +16,6 @@ maximum' :: [Integer] -> Integer
 maximum' = foldr1 max
 
 minimumBy :: (Ord a, Ord b) => (a -> b) -> [a] -> a
-minimumBy f list = snd . foldr1 (\x y -> min x y) $ map (\x -> (f x, x)) list
+minimumBy f = snd . foldr1 (\x y -> min x y) . map (\x -> (f x, x))
 --minimumBy (\x -> -x) [1,2,3]
 
