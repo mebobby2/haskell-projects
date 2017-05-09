@@ -276,5 +276,7 @@ https://github.com/apress/beg-haskell
 
 # Upto
 
-Page 66
-Lists and Predicates
+Page 67
+Its counterpart is takeWhile, which takes the initial elements
+
+before that: check why Lists.hs cannot load ParamPoly.hs module
