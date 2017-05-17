@@ -302,7 +302,7 @@ These two functions take out elements such that no two elements in the returned 
 nub and nubBy are not very performant functions, as they must check for equality between all possible pair of elements. This means that the order of the function is quadratic (n^2 time complexity).
 
 ## multiline blocks in CHCI
-Done using ```:{``` and ```:}```
+Done using ```:{``` and ```:}```. Eg:
 ```
 Prelude> :{
 Prelude| 1/2 +
