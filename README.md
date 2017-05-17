@@ -296,6 +296,11 @@ blk = \x y -> x * y
 blk = (*)
 ```
 
+## nub and nubBy
+These two functions take out elements such that no two elements in the returned list are equivalent.
+
+nub and nubBy are not very performant functions, as they must check for equality between all possible pair of elements. This means that the order of the function is quadratic (n^2 time complexity).
+
 
 # Book source code
 

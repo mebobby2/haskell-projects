@@ -40,3 +40,4 @@ isIndividual _               = False
 
 checkIndividualAnalytics :: [Client a] -> (Bool, Bool)
 checkIndividualAnalytics cs = (any isIndividual cs, not $ all isIndividual cs)
+
