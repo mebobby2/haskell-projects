@@ -317,11 +317,16 @@ intersect [1,2,3] [2,3]
 [1,2,3] `intersect` [2,3]
 ```
 
+## Haskell is declarative
+You may wonder why Haskell provides so many different functions on lists, whereas other programming languages just do fine with constructs such as iterators or for loops. The idea is that instead of explicitly transforming a list element by element, you declare transformations at a higher level of abstraction. Languages supporting this idea, such as Haskell, are called declarative.
+A classical fear when programming in Haskell is that this higher level of abstraction hurts performance. However, compilers of declarative languages are able to apply a wider range of optimizations, because they can change the code in many more ways while retaining the same behavior. A typical example code in the form map f . map g. This code performs multiple passes over the data, but can safely be converted by the compiler to map (f . g), which performs the same duty in just one pass over the data.
+
+
 # Book source code
 
 https://github.com/apress/beg-haskell
 
 # Upto
 
-Page 67
-Its counterpart is takeWhile, which takes the initial elements
+Page 72
+List Comprehensions
