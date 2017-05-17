@@ -275,6 +275,28 @@ foldr :: (a -> b -> b) -> b -> [a] -> b
 foldl :: (a -> b -> a) -> a -> [b] -> a
 ```
 
+## Operator and sections
+Lets say we want to write this anonymous block using partial application:
+
+```
+blk = \x -> x * 2
+```
+
+When the function has an operator name (only with symbols, like *), we cannot just use its name and arguments, but we need to use a section. A section is just a specification of the operation to be done, enclosed in parenthesis, and where the parameters for the anonymous function are completely wiped out.
+In this case, the new definition is:
+
+```
+blk = (*2)
+```
+
+If the block took 2 parameters, it can also be partially applied using a section:
+
+```
+blk = \x y -> x * y
+blk = (*)
+```
+
+
 # Book source code
 
 https://github.com/apress/beg-haskell
