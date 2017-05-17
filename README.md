@@ -301,6 +301,21 @@ These two functions take out elements such that no two elements in the returned 
 
 nub and nubBy are not very performant functions, as they must check for equality between all possible pair of elements. This means that the order of the function is quadratic (n^2 time complexity).
 
+## multiline blocks in CHCI
+Done using ```:{``` and ```:}```
+```
+Prelude> :{
+Prelude| 1/2 +
+Prelude| 1/3
+Prelude| :}
+```
+
+## backtick
+Use backtick to turn a function into an operator. Eg:
+```
+intersect [1,2,3] [2,3]
+[1,2,3] `intersect` [2,3]
+```
 
 # Book source code
 
