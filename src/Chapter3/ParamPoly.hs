@@ -1,5 +1,6 @@
 module Chapter3.ParamPoly where
 
+--GovOrg {clientId = 1, clientName = "MOM"}
 data Client i = GovOrg { clientId :: i, clientName :: String }
               | Company { clientId :: i, clientName :: String
                         , person :: Person, duty :: String}

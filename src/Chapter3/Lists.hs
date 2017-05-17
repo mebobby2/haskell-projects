@@ -33,3 +33,10 @@ minimumBy f = snd . foldr1 (\x y -> min x y) . map (\x -> (f x, x))
 
 skipUntilGov :: [Client a] -> [Client a]
 skipUntilGov = dropWhile (\case { GovOrg {} -> False ; _ -> True })
+
+isIndividual :: Client a -> Bool
+isIndividual (Individual {}) = True
+isIndividual _               = False
+
+checkIndividualAnalytics :: [Client a] -> (Bool, Bool)
+checkIndividualAnalytics cs = (any isIndividual cs, not $ all isIndividual cs)
