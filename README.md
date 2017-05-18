@@ -339,5 +339,5 @@ https://github.com/apress/beg-haskell
 
 # Upto
 
-Page 72
-A list comprehension may have multiple generators. The simplest way to implement multiple
+Page 75
+Haskell Origami
