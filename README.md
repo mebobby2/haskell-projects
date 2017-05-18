@@ -321,6 +321,17 @@ intersect [1,2,3] [2,3]
 You may wonder why Haskell provides so many different functions on lists, whereas other programming languages just do fine with constructs such as iterators or for loops. The idea is that instead of explicitly transforming a list element by element, you declare transformations at a higher level of abstraction. Languages supporting this idea, such as Haskell, are called declarative.
 A classical fear when programming in Haskell is that this higher level of abstraction hurts performance. However, compilers of declarative languages are able to apply a wider range of optimizations, because they can change the code in many more ways while retaining the same behavior. A typical example code in the form map f . map g. This code performs multiple passes over the data, but can safely be converted by the compiler to map (f . g), which performs the same duty in just one pass over the data.
 
+## List comprehensions
+If you remember your algebra classes, mathematicians have a very terse but intuitive language for manipulating sets. The previous example can be written in set notation as  2x | x list.odd (x)  . Haskell designers also like this syntax, so they included list comprehensions to mimic it.
+
+List comprehensions have two parts, separated by | and wrapped by square brackets. The first part is the expression, which defines a transformation to apply to all the elements that will be returned. The second part is made of a list of qualifiers, and specifies from whence the elements will come, and the constraints upon them.
+
+The first kind of qualifiers are generators, which take the form e <- list. Generators indicate that elements from list will be acted upon, and each of the elements will be referred as e in the rest of the comprehension.
+
+```
+doubleOdds list = [ 2 * x | x <- list, odd x ]
+```
+
 
 # Book source code
 
@@ -329,4 +340,4 @@ https://github.com/apress/beg-haskell
 # Upto
 
 Page 72
-List Comprehensions
+A list comprehension may have multiple generators. The simplest way to implement multiple
