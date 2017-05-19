@@ -22,8 +22,7 @@
 4. Tell Cabal to include the file in your project, under ```exposed-modules```.
 
 # Downloading packages from Hackage
-1. Add the package to ```build-depends``` property of ```.cabal``` file
-2. Run ```cabal build```
+Add the package to ```build-depends``` property of ```.cabal``` file
 
 # Notes
 
@@ -343,4 +342,5 @@ https://github.com/apress/beg-haskell
 
 # Upto
 
-Page 79
+Page 84
+Sandboxed Environments
