@@ -21,6 +21,10 @@
 3. Create a file with the same name of the last component ending in .hs (here C.hs) and write the module declaration we’ve seen above. ```module Chapter2.Section2.Example where```.
 4. Tell Cabal to include the file in your project, under ```exposed-modules```.
 
+# Downloading packages from Hackage
+1. Add the package to ```build-depends``` property of ```.cabal``` file
+2. Run ```cabal build```
+
 # Notes
 
 ## Numbers
