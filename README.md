@@ -339,5 +339,4 @@ https://github.com/apress/beg-haskell
 
 # Upto
 
-Page 75
-Haskell Origami
+Page 79
