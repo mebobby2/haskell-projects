@@ -391,5 +391,5 @@ https://github.com/apress/beg-haskell
 
 # Upto
 
-Page 103
-Binary Tress for the Minimum Price
+Page 105
+Step 2: Polymorphic Binary Trees
