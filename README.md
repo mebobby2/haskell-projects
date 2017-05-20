@@ -361,5 +361,5 @@ https://github.com/apress/beg-haskell
 
 # Upto
 
-Page 95
-Obtaining Help
+Page 96
+Ad-hoc Polymorphism: Type Classes
