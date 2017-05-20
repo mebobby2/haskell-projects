@@ -335,6 +335,25 @@ The first kind of qualifiers are generators, which take the form e <- list. Gene
 doubleOdds list = [ 2 * x | x <- list, odd x ]
 ```
 
+## Data.Map
+Maps are always shown with its keys ordered. The map itself maintains that invariant, so it can easily access the maximal and minimal elements in the map. Indeed, functions such as findMin/findMax, deleteMin/deleteMax, and updateMin/updateMax take advantage of this fact, and allows fast retrieving, deletion, or updating of the values associated to those keys.
+
+## IntMap, IntSet, HashMap, and HashSet
+Maps can be made much more efficient if you use only integers as keys. The same happens for sets holding only integer values. For that reason, the containers library provides specific data types for that purpose, namely IntMap and IntSet.
+
+Alternatively, the keys on a map or values on a set may not be integers but could be mapped almost uniquely to one. This mapping is called a hash of the original value. The types HashMap and HashSet in the unordered-containers package provides implementations of maps and sets whose keys and elements, respectively, can be hashed, and which is much more efficient than its regular counterparts, if the type admits to be hashed.
+
+## Type synonyms
+The type keyword, which we haven’t yet introduced, is used to create type synonyms, that is, giving an alternative name to a type. Usually, it’s used to call a large type by a smaller or more expressive name. For example, you may introduce the following synonym for those functions returning a Boolean value:
+
+```
+type Predicate a = a -> Bool
+```
+
+The type synonym and its expansion are interchangeable in all circumstances. That is, you can also write the type of filter as Predicate a -> [a] -> [a], and the compiler would be fine with it. In contrast, the other way to define alternative names, using newtype, doesn’t make the types equivalent.
+
+## Trees
+There are several ways to visit a tree (that is, traversing all of their elements), which are broadly divided in two families: depth-first traversal and bread-first traversal. In the former case, each node of the tree recursively visits its subtrees. There’s still a choice of when to visit the value in the node itself: before any subtree (pre-order) or after all subtrees are visited (post-order).
 
 # Book source code
 
@@ -342,5 +361,5 @@ https://github.com/apress/beg-haskell
 
 # Upto
 
-Page 84
-Sandboxed Environments
+Page 95
+Obtaining Help
