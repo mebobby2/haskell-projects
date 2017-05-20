@@ -355,11 +355,41 @@ The type synonym and its expansion are interchangeable in all circumstances. Tha
 ## Trees
 There are several ways to visit a tree (that is, traversing all of their elements), which are broadly divided in two families: depth-first traversal and bread-first traversal. In the former case, each node of the tree recursively visits its subtrees. There’s still a choice of when to visit the value in the node itself: before any subtree (pre-order) or after all subtrees are visited (post-order).
 
+## Type classes
+```
+M.insert :: Ord k => k -> a -> M.Map k a -> M.Map k a
+
+```
+Notice how Ord k is separated from the rest of the type by => (not to be confused by the arrow -> used in the type of functions). The purpose of Ord k is to constrain the set of possible types that the k type variable can take. This is different from the parametric polymorphism of the list functions in the previous chapters: here you ask the type to
+be accompanied by some functions. This kind of polymorphism is known as ad-hoc polymorphism. In this case, the Ord type class is telling that the type must provide implementations of comparison operators such as < or ==. Thus, it formalizes the notion of "default order".
+
+Eq is the type class declaring that a type supports checking equality (and inequality) between their values. Let’s look at its definition from the GHC source code
+
+```
+class Eq a where
+    (==), (/=) :: a -> a -> Bool
+    x /= y = not (x == y)
+    x == y = not (x /= y)
+```
+
+At the beginning of the section it was stated that type classes only include the declaration of functions to be implemented, but here you find some code implementation. The reason is that those are default definitions: code
+for a function that works whenever some of the rest are implemented. For example, if we implement (==), there’s a straightforward way to implement (/=), as shown above. When instantiating a type class, you are allowed to leave out those functions with a default implementation.
+
+This means that when implementing Eq, you may do it without any actual implementation, because all functions have default implementations. In that case any comparison will loop forever, as (/=) calls (==), which then calls (/=), and so on indefinitely. This may lead to the program crashing out of memory, or just staying unresponsive until you force its exit. For preventing such cases, type classes in Haskell usually specify a minimal complete definition: which set of functions should be implemented for the rest to work without problems. For Eq, the minimal complete definition is either (==) or (/=), so you need to implement at least one.
+
+## Importing instance declarations
+When you use a type that implements a class, the Haskell compiler must look for the corresponding instance declaration. It does so by looking inside all the modules that are imported, independently of the way of importing them. Currently, it’s not possible to prevent an instance declaration being imported. This means that if you find in some source code
+
+```
+import Module ()
+```
+it may not be an error (what's the point of having such a declaration if nothing is imported?), but rather an import of the instance declarations found in Module.
+
 # Book source code
 
 https://github.com/apress/beg-haskell
 
 # Upto
 
-Page 96
-Ad-hoc Polymorphism: Type Classes
+Page 103
+Binary Tress for the Minimum Price
