@@ -391,5 +391,5 @@ https://github.com/apress/beg-haskell
 
 # Upto
 
-Page 105
-Step 2: Polymorphic Binary Trees
+Page 107
+Let’s try to untangle the structure in both cases
