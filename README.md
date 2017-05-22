@@ -402,5 +402,5 @@ https://github.com/apress/beg-haskell
 
 # Upto
 
-Page 107
-Let’s try to untangle the structure in both cases
+Page 108
+Container-related Type Classes
