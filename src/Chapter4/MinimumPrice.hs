@@ -78,7 +78,18 @@ instance Monoid Min where
   mempty = Min infinity where infinity = 1/0
   mappend (Min x) (Min y) = Min $ min x y
 
+--tree = Node3 7 (Min 7) Leaf3 Leaf3
+--tree2 = treeInsert4 4 (Min 4) tree
+--tree3 = treeInsert4 11 (Min 11) tree2
+--tree4 = treeInsert4 2 (Min 2) tree3
+--tree5 = treeInsert4 5 (Min 5) tree4
+--tree6 = treeInsert4 8 (Min 8) tree5
+--tree7 = treeInsert4 2 (Min 2) tree6
+
+--Notice how the cached value at each node is the minimum price
 
 
+--If you want to built it with TravelGuides
+--Node3 (TravelGuide "A" ["A"] 7.0) (Min 7.0) Leaf3 Leaf3
 
 
