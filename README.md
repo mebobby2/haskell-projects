@@ -385,6 +385,17 @@ import Module ()
 ```
 it may not be an error (what's the point of having such a declaration if nothing is imported?), but rather an import of the instance declarations found in Module.
 
+## Monoids
+In Haskell, a monoid is a type with a rule for how two elements of that type can be combined to make another element of the same type. To be a monoid there also needs to be an element that you can think of as representing 'nothing' in the sense that when it's combined with other elements it leaves the other element unchanged.
+
+A great example is lists. Given two lists, say [1,2] and [3,4], you can join them together using ++ to get [1,2,3,4]. There's also the empty list []. Using ++ to combine [] with any list gives you back the same list, for example []++[1,2,3,4]==[1,2,3,4].
+
+Some Uses of Monoids:
+
+One reason is that with a monoid we get another function called mconcat for free. mconcat takes a list of values in a monoid and combines them all together. For example mconcat [a,b,c] is equal to a `mappend` (b `mappend` c). Any time you have a monoid you have this quick and easy way to combine a whole list together. But note that there is some ambiguity in the idea behind mconcat. To compute mconcat [a,b,...,c,d] which order should we work in? Should we work from left to right and compute a `mappend` b first? Or should we start with c `mappend` d. That's one place where the associativity law comes in: it makes no difference.
+
+Explicitly using the Monoid type class for a function also tells the reader of your code what your intentions are. If a function has signature [a] -> b you know it takes a list and constructs an object of type b from it. But it has considerable freedom in what it can do with your list. But if you see a function of type (Monoid a) => a -> b, even if it is only used with lists, we know what kind of things the function will do with the list. For example, we know that the function might add things to your list, but it's never going to pull any elements out of your list.
+
 # Book source code
 
 https://github.com/apress/beg-haskell
