@@ -1,5 +1,7 @@
 module Chapter4.MinimumPrice where
 
+import Data.Monoid (Monoid, (<>), mempty, mappend)
+
 data TravelGuide = TravelGuide { title :: String, authors :: [String], price :: Double }
                  deriving (Show, Eq, Ord)
 
@@ -55,7 +57,26 @@ treeInsert3 v c (Node3 v2 c2 l r) = case compare v v2 of
                                       GT -> Node3 v2 (min c c2) l (treeInsert3 v c r)
 treeInsert3 v c Leaf3             = Node3 v c Leaf3 Leaf3
 
+treeInsert4 :: (Ord v, Monoid c) => v -> c -> BinaryTree3 v c -> BinaryTree3 v c
+treeInsert4 v c (Node3 v2 c2 l r) = case compare v v2 of
+                                     EQ -> Node3 v2 c2 l r
+                                     LT -> let newLeft = treeInsert4 v c l
+                                               newCache = c2 <> cached newLeft <> cached r
+                                            in Node3 v2 newCache newLeft r
+                                     GT -> let newRight = treeInsert4 v c r
+                                               newCache = c2 <> cached l <> cached newRight
+                                            in Node3 v2 newCache l newRight
+treeInsert4 v c Leaf3            = Node3 v c Leaf3 Leaf3
 
+cached :: Monoid c => BinaryTree3 v c -> c
+cached (Node3 _ c _ _) = c
+cached Leaf3           = mempty
+
+newtype Min = Min Double deriving Show
+
+instance Monoid Min where
+  mempty = Min infinity where infinity = 1/0
+  mappend (Min x) (Min y) = Min $ min x y
 
 
 
