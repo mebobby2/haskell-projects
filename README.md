@@ -446,5 +446,5 @@ https://github.com/apress/beg-haskell
 
 # Upto
 
-Page 115
-Apart from using list ranges and constructing functions by hand
+Page 116
+EXERCISE 5-1: THE SIEVE OF ERATOSTHENES
