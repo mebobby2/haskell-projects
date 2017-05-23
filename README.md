@@ -434,6 +434,16 @@ You may wonder why the Prelude includes specialized definitions for lists instea
 
 https://github.com/apress/beg-haskell
 
+# Maths Definitions
+
+* Homogeneous - of the same kind; alike. E.g. An array that holds only one type
+
+* Associative - involving the condition that a group of quantities connected by operators gives the same result whatever their grouping, i.e. in whichever order the operations are performed, as long as the order of the quantities remains the same, e.g. ( a × b ) × c = a × ( b × c )
+
+* Commutative - involving the condition that a group of quantities connected by operators gives the same result whatever the order of the quantities involved, e.g. a × b = b × a.
+
+* Heterogeneous - incommensurable through being of different kinds, degrees, or dimensions. E.g. An array containing two or more different types
+
 # Upto
 
 Page 114
