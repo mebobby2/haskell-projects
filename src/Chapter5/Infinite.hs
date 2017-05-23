@@ -37,6 +37,11 @@ fibonacci = 0 : 1 : zipWith (+) fibonacci (tail fibonacci)
 --tail fibonacci = [1 1 2 3 5 8 13]
 --zipWith (+)    = [1 2 3 5 8 13 21]
 --0 : 1 :        = [0 1 1 2 3 5 8 13 21]
+--don't try to follow and understand this function as it uses recursion and a infinite list, meaning
+--there is no base case for the recursion so its very hard to follow the function. Just know that to
+--calculate the fibonacci sequence, for number at n, you add n-1 and n-2. In essence, this is what
+--this function is doing. It shifts one of the lists one element to the left and then adds all the c
+--corresponding elements at n for both list together
 
 infinite2020Machines :: [TimeMachine]
 infinite2020Machines = TM "Timely Inc." 2020 : infinite2020Machines
