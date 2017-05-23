@@ -1,4 +1,4 @@
-module Chapter5.Annotations where
+module Chapter5.Infinite where
 
 data TimeMachine = TM { manufactuer :: String, year :: Integer } deriving (Eq, Show)
 
@@ -27,3 +27,9 @@ allNumbersFrom n = n : allNumbersFrom (n+1)
 
 --zip allNumbers "abcd"
 --zip [1 .. ] "abcd"
+
+fibonacci :: [Integer]
+fibonacci = 0 : 1 : zipWith (+) fibonacci (tail fibonacci)
+--fibonacci !! 20
+--the !! operator is list indexing i.e. list[20] in ruby
+
