@@ -436,5 +436,5 @@ https://github.com/apress/beg-haskell
 
 # Upto
 
-Page 112
-Chapter 5
+Page 114
+There are even more tricks with infinite lists. Let’s look now at an interesting way to define Fibonacci numbers
