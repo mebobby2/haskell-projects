@@ -385,6 +385,9 @@ import Module ()
 ```
 it may not be an error (what's the point of having such a declaration if nothing is imported?), but rather an import of the instance declarations found in Module.
 
+## Containers
+Haskell has several data containers, including maps, sets, trees, and graphs. The quest for understanding its commonalities has led to the discovery of the concepts of functor and foldable.
+
 ## Monoids
 In Haskell, a monoid is a type with a rule for how two elements of that type can be combined to make another element of the same type. To be a monoid there also needs to be an element that you can think of as representing 'nothing' in the sense that when it's combined with other elements it leaves the other element unchanged.
 
@@ -396,11 +399,42 @@ One reason is that with a monoid we get another function called mconcat for free
 
 Explicitly using the Monoid type class for a function also tells the reader of your code what your intentions are. If a function has signature [a] -> b you know it takes a list and constructs an object of type b from it. But it has considerable freedom in what it can do with your list. But if you see a function of type (Monoid a) => a -> b, even if it is only used with lists, we know what kind of things the function will do with the list. For example, we know that the function might add things to your list, but it's never going to pull any elements out of your list.
 
+## Functors
+A data type supporting a function like map is called a functor. The corresponding class is defined as:
+```
+class Functor f where
+  fmap :: (a -> b) -> f a -> f b
+```
+You may notice a strange fact about the Functor class: in the definition of fmap the type variable corresponding to the instance is applied to another type variable, instead of being used raw. This means that those types that are to be functors should take one type parameter. For example, ```IntSet```, which takes none, cannot have such an instance (even though conceptually it is a functor), whereas ```Tree a``` takes one type parameter ```a```.
+
+The way in which the Haskell compiler checks for the correct application of type parameters is by the kind
+system. Knowing it may help you making sense of some error messages. Until now we know that values, functions and constructors have an associated type; but types themselves are also categorized based on the level of application. To start with, all basic types such as Char or Integer have kind *. Types which need one parameter to be fully applied, such as Maybe, have kind * -> *.This syntax resembles the one used for functions on purpose: if we now have Maybe Integer, we have a type of kind * -> *,which is applied a type of kind *. So the final kind for ```Maybe Integer``` is indeed *.
+
+If we want to make a type constructor an instance of ```Functor```, it has to have a kind of ```* -> *```, which means that it has to take exactly one concrete type as a type parameter. For example, ```Maybe``` can be made an instance because it takes one type parameter to produce a concrete type, like ```Maybe Int``` or ```Maybe String```. If a type constructor takes two parameters, like ```Either```, we have to partially apply the type constructor until it only takes one type parameter. So we can't write ```instance Functor Either where```, but we can write ```instance Functor (Either a) where```.
+
+
+Examples of Functors:
+```
+map   :: (a -> b) -> ([a]       -> [b])
+M.map :: (a -> b) -> (M.Map k a -> M.Map k b)
+fmap  :: (a -> b) -> (T.Tree a  -> T.Tree b)
+```
+We should remark that Set cannot be made an instance of Functor. The reason is that the mapping function for sets require all elements to be part of type class ```Ord```, i.e. has the type
+```
+Ord b => (a -> b) -> Set a -> Set b
+```
+which is not compatible with that of Functor, which doesn't have any restriction.
+
+## Why Prelude includes specialized definitions for lists
+You may wonder why the Prelude includes specialized definitions for lists instead of the most general versions using Functor and Foldable. The reason is that for a beginner, having the functions working only on [a] helps understanding the first error messages that it may encounter, because they don't involve type classes. But now that you know about them, you should aim for the largest degree of abstraction that you can achieve. Type classes allow generalizing the values it can take, therefore increasing re-use and abstraction.
+
+
+
 # Book source code
 
 https://github.com/apress/beg-haskell
 
 # Upto
 
-Page 108
-Container-related Type Classes
+Page 112
+Chapter 5
