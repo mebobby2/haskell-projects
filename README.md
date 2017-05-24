@@ -428,7 +428,39 @@ which is not compatible with that of Functor, which doesn't have any restriction
 ## Why Prelude includes specialized definitions for lists
 You may wonder why the Prelude includes specialized definitions for lists instead of the most general versions using Functor and Foldable. The reason is that for a beginner, having the functions working only on [a] helps understanding the first error messages that it may encounter, because they don't involve type classes. But now that you know about them, you should aim for the largest degree of abstraction that you can achieve. Type classes allow generalizing the values it can take, therefore increasing re-use and abstraction.
 
+## Lazy evaluation model
+Most of the programming languages follow a strict evaluation model: at the very moment a compound expression is found, it’s immediately transformed into a simpler version (maybe including calls to functions of methods), before the larger expression is evaluated. In particular, arguments to a function are evaluated before the control flow enters the body of the function itself. Haskell uses non-strict evaluation, also known as lazy evaluation.
 
+By default, Haskell only evaluates an expression until a constructor is found. The rest of the value will be left unevaluated: its place will be occupied by a placeholder indicating how that specific field can be computed. This placeholder is called a thunk. E.g:
+```
+data TimeMachine = TM { manufactuer :: String, year :: Integer } deriving (Eq, Show)
+timeMachinesFrom mf y = TM mf y : timeMachinesFrom mf (y+1)
+timelyIncMachines = timeMachinesFrom "Timely Inc." 100
+
+
+head timelyIncMachines
+```
+timeMachinesFrom will just produce a (:) constructor with a thunk for the element and another thunk for the rest of the list. When you apply head to it, you get back the first of the thunks. If you want to show the value on the screen, the thunk has to be unwrapped and the recipe to create the value followed to create it.
+
+One important feature of lazy evaluation is that once a thunk has been evaluated, the result is saved and the thunk is not evaluated again if the result of that expression is needed elsewhere. This is a great feature, because it means that you only pay once for the cost of evaluating each expression in your application. Furthermore, the pure nature of Haskell also helps in sharing thunks that refer to the same expressions, which means that it can re-use the evaluation in some part of the program in other places.
+
+It should be noted that only expressions will be shared. This should not be confused with memorizing a function: that is, caching the results for arguments that have already been provided. For example, if you call:
+```
+(allNumbersFrom 1, allNumbersFrom 2)
+```
+Even though allNumbersFrom 1 will call allNumbersFrom 2, the evaluation of allNumbersFrom 2 in allNumbersFrom 1 and in the previous expression will not be shared.
+
+This would be impossible in a language that allows printing while computing a value. Let’s assume than during its evaluation, allNumbersFrom outputs "Natural numbers rule!". If you share the same value for allNumbersFrom, the string would only be printed once. But in many languages, including C and Java, what you would expect is to show it three times, one per reference to allNumbers. You have seen that side effects make it impossible to apply these sharing optimizations, which are key to a good performance in Haskell programs.
+
+One final issue that remains to be explained is how cyclic structures are represented. The answer is that Haskell maintains itself a cycle in memory when declarations are the same. E.g. ```repeat e```
+
+thunk 1     =  e
+thunk 2     = repeat e
+constructor = :
+
+=> e : repeat e
+
+This is cyclic so, so we can remove thunk 2 and replace it with a pointer back to the constructor.
 
 # Book source code
 
@@ -446,5 +478,5 @@ https://github.com/apress/beg-haskell
 
 # Upto
 
-Page 116
-Lazy Evaluation Model
+Page 119
+EVALUATION STRATEGIES
