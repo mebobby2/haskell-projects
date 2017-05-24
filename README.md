@@ -455,7 +455,9 @@ This would be impossible in a language that allows printing while computing a va
 One final issue that remains to be explained is how cyclic structures are represented. The answer is that Haskell maintains itself a cycle in memory when declarations are the same. E.g. ```repeat e```
 
 thunk 1     =  e
+
 thunk 2     = repeat e
+
 constructor = :
 
 => e : repeat e
