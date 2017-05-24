@@ -70,5 +70,5 @@ fibonacci2 = map fst $ iterate (\(n,n1) -> (n1,n+n1)) (0,1)
 
 primes :: [Integer]
 primes = siew [ 2 .. ]
-         where siew (x:xs) = x : siew [y | y <- xs, y `mod` x /= 0]
+         where siew (x:xs) = x : siew [y | y <- xs, y < x*x || y `mod` x /= 0]
 
