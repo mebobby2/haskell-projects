@@ -464,6 +464,13 @@ constructor = :
 
 This is cyclic so, so we can remove thunk 2 and replace it with a pointer back to the constructor.
 
+## Evaluation Strategies
+We have seen two examples of evaluation strategies: ways in which the computation proceeds and the order in which parts of the expressions are evaluated. Apart from those two, more strategies have been developed.
+
+What I have called strict evaluation is also known as call by value. Sometimes, especially in object-oriented languages, this is changed to call by reference, where you don’t receive values as arguments, but boxes holding those values.
+
+Lazy evaluation is sometimes referred to as call by need, which is a special case of the more general strategy of call by name, in which function arguments are not evaluated before the body of the function but are substituted directly. The difference is that in general, call by name may evaluate the same expression more than once, whereas call by need uses thunks to do it only once.
+
 # Book source code
 
 https://github.com/apress/beg-haskell
@@ -480,5 +487,5 @@ https://github.com/apress/beg-haskell
 
 # Upto
 
-Page 119
-EVALUATION STRATEGIES
+Page 120
+Problems with Laziness
