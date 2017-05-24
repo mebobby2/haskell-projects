@@ -447,4 +447,4 @@ https://github.com/apress/beg-haskell
 # Upto
 
 Page 116
-EXERCISE 5-1: THE SIEVE OF ERATOSTHENES
+Lazy Evaluation Model

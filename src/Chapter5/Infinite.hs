@@ -67,3 +67,9 @@ fibonacci2 = map fst $ iterate (\(n,n1) -> (n1,n+n1)) (0,1)
 --6: (8,13)
 --7: (13,21)
 --map fst: [1,1,2,3,5,8,13]
+
+primes :: [Integer]
+primes = siew [ 2 .. ]
+         where siew (x:xs) = let remaining = [y | y <- xs, y `mod` x /= 0]
+                              in x : siew remaining
+
