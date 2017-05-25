@@ -471,6 +471,9 @@ What I have called strict evaluation is also known as call by value. Sometimes, 
 
 Lazy evaluation is sometimes referred to as call by need, which is a special case of the more general strategy of call by name, in which function arguments are not evaluated before the body of the function but are substituted directly. The difference is that in general, call by name may evaluate the same expression more than once, whereas call by need uses thunks to do it only once.
 
+## Problem with laziness
+Laziness is often a blessing, but sometimes it can also be a curse. As usual in computer science, there’s a trade-off in lazy evaluation: in this case, delaying the evaluation until needed may result in less computation and also allow some programming idioms unavailable in other languages. On the other hand, it may create many thunks, causing the memory to become quite full so that the operating system has to paginate, which makes the program slower.
+
 # Book source code
 
 https://github.com/apress/beg-haskell
