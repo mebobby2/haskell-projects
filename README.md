@@ -474,6 +474,55 @@ Lazy evaluation is sometimes referred to as call by need, which is a special cas
 ## Problem with laziness
 Laziness is often a blessing, but sometimes it can also be a curse. As usual in computer science, there’s a trade-off in lazy evaluation: in this case, delaying the evaluation until needed may result in less computation and also allow some programming idioms unavailable in other languages. On the other hand, it may create many thunks, causing the memory to become quite full so that the operating system has to paginate, which makes the program slower.
 
+E.g. ```foldr (+) 0 [1 .. 1000000000]``` evaluates to ```(1 + (2 + (3 + (... + <thunk>))))```. This reults in an out of memory exception because too many thunks are created and store in memory. It evaluates it this way because at each point during evaluation it only knows about one argument to (+).
+
+So, if we use parentheses in another way, making the evaluation to look like ```((((1 + 2) + 3) + ...) + <thunk>)```, the problem may be gone. You already know how to do it: using foldl: ```foldl (+) 0 [1 .. 1000000000]```. But here you face here a similar situation: (+) has at each step all of its arguments, but since you do not request the result until the end of the list, a large amount of thunks have to be created.
+
+The solution is to force evaluation: you need to tell Haskell to evaluate the (n+m) thunks before proceeding with the rest of the computation, overriding the default lazy behavior.
+
+We stress that Haskell only evaluates something until a constructor is found: the fields are left as thunks until some further computation needs the information enclosed by them. This is true also for seq: if you want to be sure that some part of a larger value is evaluated before continuing, you should explicitly get that value and force it.
+
+Now that you know about forcing evaluation, you should resist the temptation to use it everywhere you think a memory problem could be found. Forcing expressions destroys the lazy nature of the language and may also lead to cases where a previously terminating expression no longer is. Think of the case of taking the head of an infinite list: if you make Haskell force the entire list, it will never reach the end, thus entering in an infinite computation chain. If you suspect a memory leak, you should first use profiling to find the correct spot and then think carefully whether using seq will not hurt the applicability of your functions to the kind of arguments that are expected.
+
+## Irrefutable pattern
+Interesting enough, and because of this evaluation forcing in pattern matching, Haskell also includes a way to delay evaluation in matching phases. The way to do it is to use an irrefutable pattern: matching upon it never fails, but it’s only destructured when some of its constituent parts are needed. One use case for irrefutable patterns involves a function that always returns a value given the same input. For example, you are finding an element in a list, and you have made sure that the element you are searching for already exists, so find will always return the same result. In that case, you can delay the computation of find a bit, and just evaluate it when you need the constituent value.
+
+For a more explicit example, suppose that you have some function:
+
+```
+lengthyOperation = if lengthyPredicate then Just something else Nothing
+```
+and that you know that the lengthyPredicate will be true in some situation. If you write a regular matching:
+
+```
+case lengthyOperation of
+  Just something -> ...
+  Nothing        ->
+```
+
+then you will force the lengthyOperation to be evaluated just to choose the branch. But since you know that the first one will be the selected one, you can delay the computation a bit more using an irrefutable pattern:
+
+```
+case lengthyOperation of
+  ~(Just something) -> ...
+```
+
+Remember that a pattern such as that never fails. So if you come to a situation where lengthyOperation returns Nothing, and you use something inside the body of the match, you will get an error.
+
+Irrefutable patterns are rarely used, much less than forcing, but in some cases they are key to a good performance of the code. You shouldn’t worry too much about understanding all the cases where they may be applicable, but knowledge about their existence may become handy, especially if reading the inner of some built-in function.
+
+## undefined
+It won’t be long until you read in the documentation of some package that a function is strict on one or several of its arguments. At a high level, it means that the argument will have to be evaluated if it was still in thunk form, so you should take care of providing in that place an expression that wouldn’t lead to non-termination.
+
+Formally, in Haskell we have a canonical value called undefined that represents all those computations that don’t end. Because it never returns, it may be typed as you want, so we have that ```undefined :: a```. By the way, this typing makes undefined a perfect placeholder in the place of code you haven’t yet written, when you want to check that your current code passes type checking.
+
+E.g: ```let (x,y) = (undefined,"hello!") in y```
+
+A function f is then called strict on its argument if f undefined = undefined, that is, if given a non-terminating argument, the function itself does not terminate. One example of strict function is head. But a function defined as g x = 1 isn’t, because, given any argument, it returns 1.
+
+Intuitively, the notion of being strict on something means that it doesn’t inspect that something. The way a function is strict may be subtler than in the previous examples. For example, head undefined is undefined, but head (1 : undefined) isn’t.
+
+
 # Book source code
 
 https://github.com/apress/beg-haskell
