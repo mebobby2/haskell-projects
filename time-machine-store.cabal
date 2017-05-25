@@ -22,3 +22,10 @@ library
                        containers >= 0.5 && < 0.6
   hs-source-dirs:      src
   default-language:    Haskell2010
+
+executable profiling-example
+  build-depends:   base >= 4
+  hs-source-dirs:  src
+  ghc-options:     -Wall -prof -fprof-auto -rtsopts
+  main-is:         Chapter5/Main.hs
+  other-modules:   Chapter5.Annotations

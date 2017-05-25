@@ -24,6 +24,21 @@
 # Downloading packages from Hackage
 Add the package to ```build-depends``` property of ```.cabal``` file
 
+# Building executables
+1. Configure .cabal file
+```
+executable profiling-example
+  build-depends:   base >= 4
+  hs-source-dirs:  src
+  ghc-options:     -Wall -prof -fprof-auto -rtsopts
+  main-is:         Chapter5/Main.hs
+  other-modules:   Chapter5.Annotations
+```
+2. Chapter5/Main.hs must define an entry point to be called Main, and to contain the main :: IO () function, so the file should be named accordingly
+3. cabal configure
+4. cabal build
+5. Run the executable: ./dist/build/profiling-example/profiling-example
+
 # Notes
 
 ## Numbers
