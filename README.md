@@ -554,5 +554,5 @@ https://github.com/apress/beg-haskell
 
 # Upto
 
-Page 120
-Problems with Laziness
+Page 124
+To enable profiling, you must indicate so to the compiler. In particular you need to add three options
