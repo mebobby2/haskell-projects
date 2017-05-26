@@ -538,6 +538,27 @@ A function f is then called strict on its argument if f undefined = undefined, t
 Intuitively, the notion of being strict on something means that it doesn’t inspect that something. The way a function is strict may be subtler than in the previous examples. For example, head undefined is undefined, but head (1 : undefined) isn’t.
 
 ## Strictness annotations
+In general, you can think of a value in Haskell being represented in memory as some header stating its type and the constructor used to build it, followed by references to each of the fields composing that value. Basic types, such
+as integers or characters, deviate from this layout and are represented just by the header and the value itself.
+
+Remember that before being completely evaluated, expressions in Haskell are represented by thunks. This representation is very flexible but suffers from some performance penalties. First of all, you may be creating thunks for values that you know will be used in the future or that may be needed to ensure good performance for that data type. For example, if you implement a new kind of list that stores its length, it doesn’t make much sense to not store the length directly and instead evaluate it lazily, because at the moment you need to query it, a long chain of computations will happen and performance will suffer.
+
+In that case you want the length to be a strict field. Following the same syntax of bang patterns in matching, strict fields are declared by writing ! before the type of the field itself. As a result, every time a new value of that type is created, the expressions in the strict positions will be forced to evaluate in the same fashion as if you had included an explicit seq. A possible implementation of our lists with length could be:
+
+```data ListL a = ListL !Integer [a]```
+
+The memory representation of values also makes generous use of references to associate values to field positions. This means that every time you want to access a field in a value, we need to traverse one reference. Once again, this is very flexible and allows to have potentially very extensive structures in memory but can be overkill for accessing small fields, such as integer ones, whose value could be directly encoded in the space that is taken by the reference (the size of a pointer in the target architecture). A field in that situation is said to be unpacked.
+
+Unpacking fields is a special feature of the GHC compiler and it’s declared via an {-# UNPACK #-} annotation right before the field declaration. For example, you could decide to unpack the identifiers of all the constructors of the Client data type to make it more efficient:
+
+```
+data Client = GovOrg {-# UNPACK #-} !Int String
+            deriving Show
+```
+
+It should be noted that not all fields can be unpacked: it depends on the type of field. Basic types, such as integers or characters, are eligible. Other data types can only be used if they consist of just one constructor and all their fields are also unpacked: this makes it possible to unpack a tuple of types that are unpackable themselves but forbids unpacking a list. Trying to unpack a String field will also produce a warning, since it’s really just a list of Char.
+
+In many cases, you should consider if for your particular application you prefer a lazier or a stricter implementation of our data structures. Laziness delays the moment of evaluation and allows computing only what is strictly needed for the program, but has the trade-offs of larger memory consumption and more uncertainty over when the evaluation will take place.
 
 
 # Book source code
@@ -556,5 +577,4 @@ https://github.com/apress/beg-haskell
 
 # Upto
 
-Page 124
-To enable profiling, you must indicate so to the compiler. In particular you need to add three options
+Page 131
