@@ -29,3 +29,4 @@ executable profiling-example
   ghc-options:     -Wall -prof -fprof-auto -rtsopts
   main-is:         Chapter5/Main.hs
   other-modules:   Chapter5.Annotations
+  ghc-options:     -prof -fprof-auto -rtsopts -Wall
