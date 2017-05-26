@@ -537,6 +537,8 @@ A function f is then called strict on its argument if f undefined = undefined, t
 
 Intuitively, the notion of being strict on something means that it doesn’t inspect that something. The way a function is strict may be subtler than in the previous examples. For example, head undefined is undefined, but head (1 : undefined) isn’t.
 
+## Strictness annotations
+
 
 # Book source code
 
