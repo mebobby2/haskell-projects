@@ -560,6 +560,18 @@ It should be noted that not all fields can be unpacked: it depends on the type o
 
 In many cases, you should consider if for your particular application you prefer a lazier or a stricter implementation of our data structures. Laziness delays the moment of evaluation and allows computing only what is strictly needed for the program, but has the trade-offs of larger memory consumption and more uncertainty over when the evaluation will take place.
 
+## k-means
+The number of partitions to create is usually represented as k, and must be explicitly given as input to the algorithm. This need to specify the number of partitions up front is one of the shortcomings of K-means. Different methods are proposed in the literature to determine the best value to provide.
+
+K-means works only on vectors, for which you can define a notion of distance and proximity.
+
+# FlexibleInstances
+The Haskell Report only allows instance declarations for types whose shape is a name followed by a list of distinct type variables. The above definition doesn’t follow that lead, so the compiler complains. However, GHC supports those declarations if you enable the FlexibleInstances extension. So you can write stuff like this:
+```
+instance Vector (Double, Double) where
+  distance = 1.0
+```
+
 
 # Book source code
 
@@ -577,4 +589,5 @@ https://github.com/apress/beg-haskell
 
 # Upto
 
-Page 131
+Page 136
+Even though the algorithm is known to converge, you may want to stop iterating when the amount of change
