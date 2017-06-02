@@ -590,4 +590,7 @@ https://github.com/apress/beg-haskell
 # Upto
 
 Page 136
-Even though the algorithm is known to converge, you may want to stop iterating when the amount of change
+With that piece of code, you can run a first example of K-means in the interpreter
+
+Before that:
+figure out why cabal cannot find packages
