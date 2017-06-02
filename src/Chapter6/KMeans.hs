@@ -39,3 +39,5 @@ kMeans' centroids points threshold =
 initializeSimple :: Int -> [e] -> [(Double,Double)]
 initializeSimple 0 _ = []
 initializeSimple n v = (fromIntegral n, fromIntegral n) : initializeSimple (n-1) v
+
+--kMeans initializeSimple 2 ([(1,1),(1,2),(4,4),(4,5)]::[(Double,Double)]) 0.001
