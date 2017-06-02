@@ -22,7 +22,10 @@
 4. Tell Cabal to include the file in your project, under ```exposed-modules```.
 
 # Downloading packages from Hackage
-Add the package to ```build-depends``` property of ```.cabal``` file
+1. Add the package to ```build-depends``` property of ```.cabal``` file
+2. do 'cabal configure'. If it says it cannot find the package, then its not installed in your system, so you need to go to step 3
+3. cabal install package-name
+
 
 # Building executables
 1. Configure .cabal file
@@ -592,5 +595,3 @@ https://github.com/apress/beg-haskell
 Page 136
 With that piece of code, you can run a first example of K-means in the interpreter
 
-Before that:
-figure out why cabal cannot find packages
