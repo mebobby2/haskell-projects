@@ -599,6 +599,6 @@ https://github.com/apress/beg-haskell
 
 # Upto
 
-Page 141
-Let’s use lenses to rewrite the implementation of K-means
+Page 142
+EXERCISE 6-3. K-MEANS LENSES
 
