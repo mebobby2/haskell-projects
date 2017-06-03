@@ -11,7 +11,7 @@ clusterAssignmentPhase centroids points =
    in foldr (\p m -> let chosenCentroid = minimumBy (\x y -> compare (distance x $ toVector p)
                                                                      (distance y $ toVector p))
                                                      centroids
-                      in M.adjust (p:) chosenCentroid m)
+                      in M.adjust (p:) chosenCentroid m) -- (p:) is a section
             initialMap points
 
 newCentroidPhase :: (Vector v, Vectorizable e v) => M.Map v [e] -> [(v,v)]
