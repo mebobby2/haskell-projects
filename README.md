@@ -600,8 +600,5 @@ https://github.com/apress/beg-haskell
 # Upto
 
 Page 142
-EXERCISE 6-3. K-MEANS LENSES
-
-Before that:
-Done the exercise already, so just need to figure out how to run it and make sure it produces the same results as that of KMeans.hs
+Discovering Monads
 

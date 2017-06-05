@@ -39,4 +39,8 @@ kMeans' state =
       state3 = state2 & steps +~ 1
    in if state3^.err < state3^.threshold then state3 else kMeans' state3
 
+initializeSimple :: Int -> [e] -> [(Double,Double)]
+initializeSimple 0 _ = []
+initializeSimple n v = (fromIntegral n, fromIntegral n) : initializeSimple (n-1) v
 
+--kMeans initializeSimple 2 ([(1,1),(1,2),(4,4),(4,5)]::[(Double,Double)]) 0.001
