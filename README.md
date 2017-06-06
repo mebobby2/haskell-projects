@@ -622,6 +622,6 @@ https://github.com/apress/beg-haskell
 
 # Upto
 
-Page 142
-Discovering Monads
+Page 145
+In the version that will be developed from now on, only the information about the centroids, the error threshold, and the number of steps will be recorded
 
