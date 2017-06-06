@@ -605,6 +605,9 @@ purchaseValue purchaseId =
     Just $ fromInteger n * price      )))
 ```
 
+## Combinator
+There is no formal definition of a combinator, but usually in the haskell community, a combinator is a function that glues other functions together to perform a certain task. ```approxSqrt x = round (sqrt x)``` can be re-written using the combinator (.), ```approxSqrt = round . sqrt```. ```thenDo``` in the above point is a user defined combinator.
+
 
 # Book source code
 
