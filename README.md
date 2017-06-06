@@ -582,6 +582,21 @@ ou’ve already seen an example of metaprogramming: the deriving mechanism for b
 
 Template Haskell is not part of the Haskell 2010 Report so, as usual, your code won’t be easily portable to other Haskell compilers as is stands. However, GHC provides a command-line argument, -ddump-splices, which outputs the code that Template Haskell generated, and you can copy it back if you need full compatibility.
 
+## Hanging Lambdas
+The style of writing the argument to a function in a different line from the body is called “hanging lambdas.” It’s very common when using function combinators, such as our thenDo.
+```
+thenDo :: Maybe a -> (a -> Maybe b) -> Maybe b
+thenDo Nothing _ = Nothing
+thenDo (Just x) f = f x
+
+purchaseValue :: Integer -> Maybe Double
+purchaseValue purchaseId =
+  numberItemsByPurchaseId purchaseId `thenDo` (\n ->
+    productIdByPurchaseId purchaseId `thenDo` (\productId ->
+    priceByProductId productId       `thenDo` (\price ->
+    Just $ fromInteger n * price      )))
+```
+
 
 # Book source code
 
