@@ -288,6 +288,14 @@ Usually we prefer these curried versions, because we can partially applicate the
 map (uncurry max) [(1,2),(2,1),(3,4)]
 ```
 
+```
+:t max
+max :: Ord a => a -> a -> a
+
+:t uncurry max
+uncurry max :: Ord c => (c, c) -> c
+```
+
 ## folds
 The name foldr is a reminder of the algorithm the function implements. It is a fold which associates to the right. That is, the innermost parenthesis will be found in the right side of the expression. Similarly you can build a fold that associates to the left, which is included in the Haskell Platform as foldl.
 
