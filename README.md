@@ -625,6 +625,5 @@ https://github.com/apress/beg-haskell
 
 # Upto
 
-Page 146
-
-tip: changing CombinatorsState.hs file and up to the function clusterAssignments
+Page 147
+Dissecting the Combinators
