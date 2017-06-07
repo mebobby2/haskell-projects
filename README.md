@@ -623,6 +623,75 @@ The Monad class supports these functionalities.
 
 In summary, a monad is an abstraction that allows us to write imperative code that can fail and return a result.
 
+## do notation
+Haskell gives special syntax for monads: the so-called do notation.
+E.g.
+```f >> g``` is written as:
+```
+do f
+   g
+```
+
+```f >>= (\x -> g x)``` is written as
+```
+do x <- f
+   g x
+```
+
+There’s also support for introducing computations that are not done inside a monadic context. For example, you may need to call (+) over a number that has been obtained before. But if you do the following:
+
+```
+do number1 <- obtainNumber1  -- you can specify any Maybe value, such as Just 3
+   number2 <- obtainNumber2  -- you can specify any Maybe value, such as Just 5
+   sum     <- number1 + number2
+   return $ sqrt sum
+```
+
+The compiler will complain because the addition doesn’t have the required return type, which should be m a, where m is a monad. One solution is changing the previous-to-last line to ```sum <- return $ number1 + number2```, but this introduced an unnecessary burden. The best thing is to use a let expression:
+
+```
+do number1 <- obtainNumber1  -- you can specify any Maybe value, such as Just 3
+   number2 <- obtainNumber2  -- you can specify any Maybe value, such as Just 5
+   let sum = number1 + number2
+   return $ sqrt sum
+```
+
+Notice that you don’t have to write in after this kind of let expression.
+
+You can use pattern matching directly on let and where blocks and function declarations. This possibility is also available when using <- or let in a do block. If you remember, this had the risk of the returning value not matching the pattern. In those cases, the compiler added automatically a call to error with the appropriate message. When using do notation, the behavior deviates a bit from this: instead of calling error, the compiler will call the fail function of the monad. For example, the code:
+
+```
+do True <- willThatHold -- placeholder for a function returning a Maybe Bool value
+   f 5
+```
+
+Would be generate to a version with a explicit branch for those values that are not True, even if that part didn’t appear in the code:
+
+```
+willThatHold >>= \x ->
+  case x of
+    True -> f 5
+    _ -> fail "error"
+```
+
+The great power of do blocks comes from the fact that they are not limited to just two expressions: the syntax is desugared also for more expressions. For example, if you have:
+
+```
+do x <- f
+   g
+   y <- h x
+   return y
+```
+
+This is more readable than its corresponding translation:
+
+```
+f >>= (\x -> g >> (h x -> (\y -> return y)))
+```
+
+
+
+
 # Book source code
 
 https://github.com/apress/beg-haskell
