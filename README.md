@@ -623,6 +623,11 @@ The Monad class supports these functionalities.
 
 In summary, a monad is an abstraction that allows us to write imperative (or sequential) that manipulates state, and can either fail or return a result.
 
+How monads came about?
+From the similarities in the code using Maybe and using State the notion of monad was devised: a way to combine computations with some special characteristic, such as being able to fail or having an internal state.
+
+You have seen several other monads: Reader, which holds a read-only context; Writer, which outputs a write-only value that is combined using a monoid structure; RWS, which combines the three Reader, Writer, and State monads; and ST, which implements controlled mutable variables.
+
 ## do notation
 Haskell gives special syntax for monads: the so-called do notation.
 E.g.
@@ -708,5 +713,4 @@ https://github.com/apress/beg-haskell
 
 # Upto
 
-Page 151
-Monad Laws
+Page 157
