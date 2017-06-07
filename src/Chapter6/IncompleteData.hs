@@ -48,4 +48,9 @@ purchaseValueMonad purchaseId =
     priceByProductId productId       >>= (\price ->
     return $ fromInteger n * price      )))
 
+purchaseValueWithDo :: Integer -> Maybe Double
+purchaseValueWithDo purchaseId = do n         <- numberItemsByPurchaseId purchaseId
+                                    productId <- productIdByPurchaseId purchaseId
+                                    price     <- priceByProductId productId
+                                    return $ fromInteger n * price
 
