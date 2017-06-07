@@ -701,7 +701,7 @@ reverse          :: [a] -> [a]
 reverse          =  foldl (flip (:)) []
 ```
 ```(flip (:))``` looks like a lambda without any arguments, but its just a normal partial function application. The compiler will compile if you try doing this: ```(-> 2) + 2```.
-
+If you think about it, it doesn't make sense to have no argument lambdas, because if a lambda has no arguments, Haskell will apply it immediately. And if its applied immediately, its not a lambda is it...
 
 
 
