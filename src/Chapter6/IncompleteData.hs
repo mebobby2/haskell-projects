@@ -40,3 +40,12 @@ purchaseValue purchaseId =
     productIdByPurchaseId purchaseId `thenDo` (\productId ->
     priceByProductId productId       `thenDo` (\price ->
     Just $ fromInteger n * price      )))
+
+purchaseValueMonad :: Integer -> Maybe Double
+purchaseValueMonad purchaseId =
+  numberItemsByPurchaseId purchaseId >>= (\n ->
+    productIdByPurchaseId purchaseId >>= (\productId ->
+    priceByProductId productId       >>= (\price ->
+    return $ fromInteger n * price      )))
+
+

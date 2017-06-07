@@ -609,6 +609,20 @@ purchaseValue purchaseId =
 There is no formal definition of a combinator, but usually in the haskell community, a combinator is a function that glues other functions together to perform a certain task. ```approxSqrt x = round (sqrt x)``` can be re-written using the combinator (.), ```approxSqrt = round . sqrt```. ```thenDo``` in the above point is a user defined combinator.
 
 
+## Monad
+This type class encompasses all those types that allow combining computations of a certain kind between them. You have already seen two examples:
+
+* The Maybe monad combines functions that may fail
+* The State s monad combines functions which keep track of an internal state of type s
+
+The Monad class supports these functionalities.
+1. ```>>=``` binding
+2. ```return``` wrap a pure value using a monad
+3. ```>>``` combines two computations such that the second one doesn't use the return value of the first
+4. ```fail``` allows special behaviour of the monad when some part of its computation fails.
+
+In summary, a monad is an abstraction that allows us to write imperative code that can fail and return a result.
+
 # Book source code
 
 https://github.com/apress/beg-haskell
