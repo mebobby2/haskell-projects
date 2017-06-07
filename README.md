@@ -694,6 +694,14 @@ This is more readable than its corresponding translation:
 f >>= (\x -> g >> (h x -> (\y -> return y)))
 ```
 
+## Lambda with no arguments
+In haskell, there are no such thing as lambdas with no arguments. E.g.
+```
+reverse          :: [a] -> [a]
+reverse          =  foldl (flip (:)) []
+```
+```(flip (:))``` looks like a lambda without any arguments, but its just a normal partial function application. The compiler will compile if you try doing this: ```(-> 2) + 2```.
+
 
 
 
