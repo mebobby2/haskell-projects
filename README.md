@@ -621,7 +621,7 @@ The Monad class supports these functionalities.
 3. ```>>``` combines two computations such that the second one doesn't use the return value of the first
 4. ```fail``` allows special behaviour of the monad when some part of its computation fails.
 
-In summary, a monad is an abstraction that allows us to write imperative code that can fail and return a result.
+In summary, a monad is an abstraction that allows us to write imperative (or sequential) that manipulates state, and can either fail or return a result.
 
 ## do notation
 Haskell gives special syntax for monads: the so-called do notation.
