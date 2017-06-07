@@ -707,7 +707,7 @@ Also, lambda calculus, which is what Haskell is based on, does not have nullary 
 
 Furthermore, what is a function without arguments? – A value.
 
-Don't be confused with this code though: ```\() -> "s"```. It's a lambda, and it can be applied like so ```(\() -> "s") ()```. But this isn't a nullary lambda, its actually a unary lambda that uses pattern matching to match on an empty tuple.
+Don't be confused with this code though: ```\() -> "s"```. It's a lambda, and it can be applied like so ```(\() -> "s") ()```. But this isn't a nullary lambda, its actually a unary lambda that uses pattern matching to match on an empty tuple as an argument.
 
 
 
