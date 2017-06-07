@@ -703,6 +703,12 @@ reverse          =  foldl (flip (:)) []
 ```(flip (:))``` looks like a lambda without any arguments, but its just a normal partial function application. The compiler will compile if you try doing this: ```(-> 2) + 2```.
 If you think about it, it doesn't make sense to have no argument lambdas, because if a lambda has no arguments, Haskell will apply it immediately. And if its applied immediately, its not a lambda is it...
 
+Also, lambda calculus, which is what Haskell is based on, does not haev nullary functions. Every function takes exactly one argument. However, this argument may be a list, or the function may return another function that takes the next argument. Haskell prefers the latter solution, so that a b c is actually two function calls ((a b) c). To simulate nullary functions, you have to pass some unused placeholder value.
+
+Furthermore, what is a function without arguments? – A value.
+
+Don't be confused with this code though: ```\() -> "s"```. It's a lambda, and it can be applied like so ```(\() -> "s") ()```. But this isn't a nullary lambda, its actually a unary lambda that uses pattern matching to match on an empty tuple.
+
 
 
 # Book source code
