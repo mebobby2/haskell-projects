@@ -708,5 +708,5 @@ https://github.com/apress/beg-haskell
 
 # Upto
 
-Page 147
-Dissecting the Combinators
+Page 151
+Monad Laws
