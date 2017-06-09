@@ -609,7 +609,9 @@ purchaseValue purchaseId =
 
 ## Partial applications in practice
 No partial application - ```replicate 3 "a"```
+
 With partial application - ```(replicate 3) "a"```
+
 The one with partial application looks like a lambda, but its not. lambdas always have one argument e.g. ```(\x -> )```. ```(replicate 3)``` is just partial application of the ```replicate``` function with only its first argument.
 
 ## Combinator
