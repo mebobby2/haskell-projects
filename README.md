@@ -614,10 +614,13 @@ With partial application - ```(replicate 3) "a"```
 
 The one with partial application looks like a lambda, but its not. Lambdas always have one argument e.g. ```(\x -> )```. ```(replicate 3)``` is just partial application of the ```replicate``` function with only its first argument.
 
+## $ vs .
 Using ```$```
+
 ```concat $ (replicate 3) "a"```
 
 Using ```.```
+
 ```(concat . (replicate 3)) "a"``` compiles but ```concat . (replicate 3) "a"``` does not. It does not compile because Haskell evaluates from right to left. It first evaluates ```(replicate 3) "a"```, and then applies the results to ```concat```. But since ```.``` is function composition, the compiler complains there is not other parameters to apply to ```concat . (replicate 3) "a"```. Hence we need brackets, like so, ```(concat . (replicate 3)) "a"``` so it evaulates the function composition first, and then applies the argument ```"a"``` to ```(concat . (replicate 3))```
 
 ## Combinator
