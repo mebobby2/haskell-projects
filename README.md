@@ -133,7 +133,6 @@ are not equilvalent.
 
 When the value is given to f, the first pattern does not match, because "Director" is not equal to "Boss". So the system goes into the second black-hole match and sees that there is no boss. However, on g it first matches into being a Company, which the value satisfies, and in this point it enters the body of the match and forgets about other alternatives. Then, the inner match fails, raising the exception.
 
-
 ## Order of evaluations?
 How does Haskell evaluate this expression?
 ```reverse2 (tail list) +++ [head list]```
@@ -153,6 +152,9 @@ In Haskell, function application has precedence over operators. ```reverse2 tail
 4. reverse_tail_results +++ [head_list]
 
 ```+++``` is an infix operator, meaning it can be written as ```+++ reverse_tail_results [head_list]```. So the final evaluation is a function application of ```+++``` with two arguments reverse_tail_results and [head_list].
+
+## More order of evaluations
+In haskell, the expression is evaulated from right to left. E.g. ```2:2``` will fail because the operator ```:``` concatenates an elment to a list, there the second argument needs to be a list. So, ```2:[2]``` will succeed. However, ```2:2:[2]``` will also succeed as haskell evaluates from right to left. So ```2:2:[2]``` will first evaluate ```2:[2]``` resulting in ```[2,2]```, and then it continue and evaluate ```2:[2,2]```.
 
 ## as patterns
 ```
