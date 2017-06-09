@@ -154,7 +154,7 @@ In Haskell, function application has precedence over operators. ```reverse2 tail
 ```+++``` is an infix operator, meaning it can be written as ```+++ reverse_tail_results [head_list]```. So the final evaluation is a function application of ```+++``` with two arguments reverse_tail_results and [head_list].
 
 ## More order of evaluations
-In haskell, the expression is evaulated from right to left. E.g. ```2:2``` will fail because the operator ```:``` concatenates an elment to a list, there the second argument needs to be a list. So, ```2:[2]``` will succeed. However, ```2:2:[2]``` will also succeed as haskell evaluates from right to left. So ```2:2:[2]``` will first evaluate ```2:[2]``` resulting in ```[2,2]```, and then it continue and evaluate ```2:[2,2]```.
+In haskell, expressions are evaulated from right to left. E.g. ```2:2``` will fail because the operator ```:``` concatenates an element to a list, therefore the second argument needs to be a list. So, ```2:[2]``` will succeed. However, ```2:2:[2]``` will also succeed as haskell evaluates from right to left. So ```2:2:[2]``` will first evaluate ```2:[2]``` resulting in ```[2,2]```, and then it continues and evaluate the remainder of the expression which is```2:[2,2]```.
 
 ## as patterns
 ```
