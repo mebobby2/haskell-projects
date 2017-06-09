@@ -621,7 +621,7 @@ Using ```$```
 
 Using ```.```
 
-```(concat . (replicate 3)) "a"``` compiles but ```concat . (replicate 3) "a"``` does not. It does not compile because Haskell evaluates from right to left. It first evaluates ```(replicate 3) "a"```, and then applies the results to ```concat```. But since ```.``` is function composition, the compiler complains there is not other parameters to apply to ```concat . (replicate 3) "a"```. Hence we need brackets, like so, ```(concat . (replicate 3)) "a"``` so it evaulates the function composition first, and then applies the argument ```"a"``` to ```(concat . (replicate 3))```
+```(concat . (replicate 3)) "a"``` compiles but ```concat . (replicate 3) "a"``` does not. It does not compile because Haskell evaluates from right to left. It first evaluates ```(replicate 3) "a"```, and then applies the results to ```concat```. But since ```.``` is function composition, the compiler complains because there is no other parameters to apply to ```concat . (replicate 3) "a"```. Hence we need brackets, like so, ```(concat . (replicate 3)) "a"``` so it evaulates the function composition first, and then applies the argument ```"a"``` to ```(concat . (replicate 3))```
 
 ## Combinator
 There is no formal definition of a combinator, but usually in the haskell community, a combinator is a function that glues other functions together to perform a certain task. ```approxSqrt x = round (sqrt x)``` can be re-written using the combinator (.), ```approxSqrt = round . sqrt```. ```thenDo``` in the above point is a user defined combinator.
