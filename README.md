@@ -612,7 +612,7 @@ No partial application - ```replicate 3 "a"```
 
 With partial application - ```(replicate 3) "a"```
 
-The one with partial application looks like a lambda, but its not. lambdas always have one argument e.g. ```(\x -> )```. ```(replicate 3)``` is just partial application of the ```replicate``` function with only its first argument.
+The one with partial application looks like a lambda, but its not. Lambdas always have one argument e.g. ```(\x -> )```. ```(replicate 3)``` is just partial application of the ```replicate``` function with only its first argument.
 
 ## Combinator
 There is no formal definition of a combinator, but usually in the haskell community, a combinator is a function that glues other functions together to perform a certain task. ```approxSqrt x = round (sqrt x)``` can be re-written using the combinator (.), ```approxSqrt = round . sqrt```. ```thenDo``` in the above point is a user defined combinator.
