@@ -274,6 +274,8 @@ Once you know about the possibility of partially applying functions, it’s time
 
 Partial application encourages a programming style where functions are combined without ever mentioning their parameters. This is called point-free style (because in mathematics, parameters to functions are called points).
 
+Also, point free also applies to multiple arguments, not just the last argument. E.g. ```split l n = flip splitAt l n``` can be written using point free as ```split = flip splitAt```.
+
 ## Function composition
 Is when the period applies one function after the other. For example, following is how to write function f applied to the output from g:
 
