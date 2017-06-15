@@ -731,6 +731,25 @@ Furthermore, what is a function without arguments? – A value.
 
 Don't be confused with this code though: ```\() -> "s"```. It's a lambda, and it can be applied like so ```(\() -> "s") ()```. But this isn't a nullary lambda, its actually a unary lambda that uses pattern matching to match on an empty tuple as an argument.
 
+## Monads in terms of fmap and join
+A monad is composed by a return function, which wraps a single value, and a bind function (>>=), which threads several computations in the monad. The corresponding instance for list reads as follows:
+
+```
+instance Monad [] where
+  return a = [a]
+  x >>= f  = concat $ map f x
+```
+
+However, there’s another possible way to define a monad, and lists are the perfect example of this different view. Instead of (>>=), you define fmap and additionally a join function.
+
+```
+x >>= f = join $ fmap f x
+```
+
+You have just seen another way in which you can get a definition of fmap using the monad functions, apart from using liftM. Every type that belongs to the Monad type class can also be made an inhabitant of the Functor type class in a uniform way. This is not reflected in the definition of the Monad type class by historical accident, but the situation will be corrected soon.
+
+
+
 ## Monad Transformers
 You have so far been looking at examples that are using one monad at a time. And that is generally what you’ll encounter as you program in Haskell. However, more complex applications sometimes require the power of several monads, like Maybe for handling errors and Writer for logging information about the process. The most common way to combine multiple monads is by using monad transformers.
 
@@ -750,4 +769,6 @@ https://github.com/apress/beg-haskell
 
 # Upto
 
-Page 157
+Page 162
+
+Failures and Alternatives
