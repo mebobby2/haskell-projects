@@ -731,7 +731,8 @@ Furthermore, what is a function without arguments? – A value.
 
 Don't be confused with this code though: ```\() -> "s"```. It's a lambda, and it can be applied like so ```(\() -> "s") ()```. But this isn't a nullary lambda, its actually a unary lambda that uses pattern matching to match on an empty tuple as an argument.
 
-
+## Monad Transformers
+You have so far been looking at examples that are using one monad at a time. And that is generally what you’ll encounter as you program in Haskell. However, more complex applications sometimes require the power of several monads, like Maybe for handling errors and Writer for logging information about the process. The most common way to combine multiple monads is by using monad transformers.
 
 # Book source code
 
