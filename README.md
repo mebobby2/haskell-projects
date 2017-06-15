@@ -384,6 +384,36 @@ type Predicate a = a -> Bool
 
 The type synonym and its expansion are interchangeable in all circumstances. That is, you can also write the type of filter as Predicate a -> [a] -> [a], and the compiler would be fine with it. In contrast, the other way to define alternative names, using newtype, doesn’t make the types equivalent.
 
+## newtype
+Newtypes are a feature of Haskell that let you define a new type in terms of an existing type.
+In the following example, I create a newtype for Email, which “holds” a String. ```newtype Email = Email String```.
+
+They are similar to type synonyms (```type Email = String```), except that type synonyms don’t create new types, they just allow you to refer to existing types by other names.
+Every newtype can be easily translated into a data declaration. In fact, only the keyword changes: ```data Email = Email String```.
+
+The other promise of newtypes is that we can use them to make our code more type safe. Instead of passing around String as an email, for example, we can create a super lightweight “wrapper” around String called Email, and make it an error to use a String wherever an Email is expected.
+
+This practice isn’t restricted to Haskell. Even in Java, it’s considered good coding practice to wrap primitives with classes whose names denote the meaning of the wrapper (Email, SSN, Address, etc.).
+
+## More newtype
+In a typical Haskell application, some types will be large, with multiple branches separated by | and multiple constituents in each branch. However, many types will be small wrappers around existing types, just meant to be used for type safety. For example, in order to prevent someone from adding together an age and a weight, you might want to create separate data types for each:
+
+```
+data Age = Age Float
+data Weight = Weight Float
+```
+
+If we write ```1.0 + 2.0```, the compiler will produce ```3.0```, regardless of what the ```1.0``` and ```2.0``` were meant to represent. However, if we try to write ```Age 1.0 + Weight 2.0```, we will get a type error, because the operation we are trying to do is meaningless. In order to facilitate simple wrapper types like ```Age``` and ```Weight```, Haskell provides the newtype keyword:
+
+```
+newtype Age = Age Float
+newtype Weight = Weight Float
+```
+
+A newtype declaration is identical to a simple data declaration. However, there can only be one constructor with one constituent type in it, which enforces the fact that newtype types are just wrappers. In exchange for this restriction, the compiler guarantees that there will be no runtime cost associated with using a newtype — unlike data, the constructors and de-constructors are guaranteed to be optimized away by the compiler.
+
+
+
 ## Trees
 There are several ways to visit a tree (that is, traversing all of their elements), which are broadly divided in two families: depth-first traversal and bread-first traversal. In the former case, each node of the tree recursively visits its subtrees. There’s still a choice of when to visit the value in the node itself: before any subtree (pre-order) or after all subtrees are visited (post-order).
 
