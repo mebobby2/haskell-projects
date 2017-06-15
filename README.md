@@ -639,7 +639,7 @@ This type class encompasses all those types that allow combining computations of
 
 The Monad class supports these functionalities.
 1. ```>>=``` binding
-2. ```return``` wrap a pure value using a monad, e.g. calling ```return 1``` when using the list nomad will return [1]
+2. ```return``` wrap a pure value using a monad, e.g. calling ```return 1``` when using the list nomad will return ```[1]```
 3. ```>>``` combines two computations such that the second one doesn't use the return value of the first
 4. ```fail``` allows special behaviour of the monad when some part of its computation fails.
 
