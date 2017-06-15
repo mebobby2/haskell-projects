@@ -769,6 +769,6 @@ https://github.com/apress/beg-haskell
 
 # Upto
 
-Page 162
+Page 166
 
-Failures and Alternatives
+As an example, here is the code converting the information in a product and a purchase into a real
