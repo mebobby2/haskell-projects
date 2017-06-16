@@ -778,10 +778,20 @@ x >>= f = join $ fmap f x
 
 You have just seen another way in which you can get a definition of fmap using the monad functions, apart from using liftM. Every type that belongs to the Monad type class can also be made an inhabitant of the Functor type class in a uniform way. This is not reflected in the definition of the Monad type class by historical accident, but the situation will be corrected soon.
 
-
-
 ## Monad Transformers
 You have so far been looking at examples that are using one monad at a time. And that is generally what you’ll encounter as you program in Haskell. However, more complex applications sometimes require the power of several monads, like Maybe for handling errors and Writer for logging information about the process. The most common way to combine multiple monads is by using monad transformers.
+
+## Integrals
+Integral types contain only whole numbers and not fractions. The most commonly used integral types are:
+
+* Integer, which are arbitrary-precision integers, often called "bignum" or "big-integers" in other languages, and
+* Int, which fixed-width machine-specific integers with a minimum guaranteed range of −229 to 229 − 1. In practice, its range can be much larger: on the x86-64 version of Glasgow Haskell Compiler, it can store any signed 64-bit integer.
+
+The workhorse for converting from integral types is fromIntegral, which will convert from any Integral type into any Numeric type (which includes Int, Integer, Rational, and Double):
+
+```fromIntegral :: (Num b, Integral a) => a -> b```
+
+For example, given an Int value n, one does not simply take its square root by typing sqrt n, since sqrt can only be applied to Floating-point numbers. Instead, one must write sqrt (fromIntegral n) to explicitly convert n to a floating-point number.
 
 # Book source code
 
