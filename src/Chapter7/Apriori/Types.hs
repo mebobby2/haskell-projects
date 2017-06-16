@@ -1,4 +1,4 @@
-module Chapter7.APriori.Types where
+module Chapter7.Apriori.Types where
 
 import Data.Set (Set)
 import qualified Data.Set as S
