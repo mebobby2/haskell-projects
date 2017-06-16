@@ -809,6 +809,6 @@ https://github.com/apress/beg-haskell
 
 # Upto
 
-Page 166
+Page 173
 
-As an example, here is the code converting the information in a product and a purchase into a real
+Monads and Lists Redux
