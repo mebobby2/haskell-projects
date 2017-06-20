@@ -1,4 +1,4 @@
-module Chapter7.APriori.FirstImpl (apriori) where
+module Chapter7.Apriori.FirstImpl (apriori) where
 
 -- import Data.Set (Set)
 import qualified Data.Set as S
