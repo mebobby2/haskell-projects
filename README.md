@@ -831,6 +831,6 @@ https://github.com/apress/beg-haskell
 
 # Upto
 
-Page 175
+Page 177
 
-Monad Comprehensions
+Combining Monads
