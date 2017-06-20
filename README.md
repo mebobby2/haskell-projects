@@ -793,6 +793,28 @@ The workhorse for converting from integral types is fromIntegral, which will con
 
 For example, given an Int value n, one does not simply take its square root by typing sqrt n, since sqrt can only be applied to Floating-point numbers. Instead, one must write sqrt (fromIntegral n) to explicitly convert n to a floating-point number.
 
+## mapM and forM
+mapM and forM are really specializations of the more general sequence function, which executes all actions of a set of monad values under the same monad context. The type of sequence is ```Monad m => [m a] -> m [a]```.
+
+## liftM and ap
+In the previous chapter you saw how every Monad admits a function called ```liftM``` of type ```Monad m => (a -> b) -> m a -> m b```. This function allows converting any pure function into a function working on a monad (usually called lifting). As you already saw, this makes every ```Monad``` a ```Functor```. This goes on very well, until you find a function with more than one parameter that you want to be lifted. For that case, the ```Control.Monad``` module provides functions ```liftM2```, ```liftM3``` and so on, which convert into monadic form functions with 2, 3 or more arguments.
+
+However, it seems that the need of a family of functions, one per each number of arguments, is not very coherent with the elegance that Haskell code usually has. One would expect a solution that works for every number of arguments.
+
+This solution exists, and it’s called ap. This function has type ```Monad m => m (a -> b) -> m a -> m b```. This small change in signature allows chaining several of this together. For example, say you want to lift the compare function. The first thing is wrapping the entire function into a monad to satisfy the type of the first argument. You do so via:
+```
+Prelude> :t return compare
+return compare :: (Monad m, Ord a) => m (a -> a -> Ordering)
+```
+
+Now you use ap to feed the first argument. Then, you get back another function with expects one parameter less. You can think of ap as a replacement of ($) when using monads. So, assuming x has type m a, then:
+
+```return compare `ap` x :: (Monad m, Ord a) => m (a -> Ordering)```
+
+Finally, you can use ```ap``` again to feed the last argument and get the final result.
+
+As a rule of thumb, you can replace any call of the form ```liftMn f x1 x2 ... xn``` by return ```f `ap` x1 `ap` x2 `ap` ... `ap` xn```. The ability to do so will play an important role in other important Haskell type class, ```Applicative```.
+
 # Book source code
 
 https://github.com/apress/beg-haskell
@@ -809,6 +831,6 @@ https://github.com/apress/beg-haskell
 
 # Upto
 
-Page 173
+Page 175
 
-Monads and Lists Redux
+Monad Comprehensions
