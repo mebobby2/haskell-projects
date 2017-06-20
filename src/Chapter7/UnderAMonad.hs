@@ -26,5 +26,18 @@ logInformation2 infos = forM_ infos $ \s ->
 factorialSteps :: Integer -> Writer (Sum Integer) Integer
 factorialSteps n = foldM (\f x -> tell (Sum 1) >> return (f*x)) 1 [1 .. n]
 
+--We can use foldM to sum a list and print the intermediate sum at each step:
+--Monads> foldM (\a b ->
+--               putStrLn (show a ++ "+" ++ show b ++
+--                         "=" ++ show (a+b)) >>
+--               return (a+b)) 0 [1..5]
+--0+1=1
+--1+2=3
+--3+3=6
+--6+4=10
+--10+5=15
+--Monads> it
+--15
+
 powerset :: [a] -> [[a]]
 powerset = filterM (\_ -> [False, True])
