@@ -302,6 +302,8 @@ max :: Ord a => a -> a -> a
 uncurry max :: Ord c => (c, c) -> c
 ```
 
+In summary, Currying is the process of transforming a function that takes multiple arguments into a function that takes just a single argument and returns another function if any arguments are still needed.
+
 ## folds
 The name foldr is a reminder of the algorithm the function implements. It is a fold which associates to the right. That is, the innermost parenthesis will be found in the right side of the expression. Similarly you can build a fold that associates to the left, which is included in the Haskell Platform as foldl.
 
