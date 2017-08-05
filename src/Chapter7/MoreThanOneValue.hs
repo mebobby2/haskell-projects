@@ -8,11 +8,11 @@ brokenThreeJumps y = do firstJ  <- brokenJump y
                         secondJ <- brokenJump firstJ
                         brokenJump secondJ
 
---:{
---do x <- [1,2,3]
---   y <- [7,8,9]
---   return $ x * y
---:}                        
+-- :{
+-- do x <- [1,2,3]
+--    y <- [7,8,9]
+--    return $ x * y
+-- :}
 
 --Notice how in the example above, we need to use return. The list nomad will automatically concat the results and 
 --return them. However, it can only cancat list types. x * y returns a number, not a list, there we must use return
