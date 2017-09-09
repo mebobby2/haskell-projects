@@ -833,6 +833,6 @@ https://github.com/apress/beg-haskell
 
 # Upto
 
-Page 177
+Page 184
 
-Combining Monads
+Chapter 8
