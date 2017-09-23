@@ -817,6 +817,28 @@ Finally, you can use ```ap``` again to feed the last argument and get the final 
 
 As a rule of thumb, you can replace any call of the form ```liftMn f x1 x2 ... xn``` by return ```f `ap` x1 `ap` x2 `ap` ... `ap` xn```. The ability to do so will play an important role in other important Haskell type class, ```Applicative```.
 
+## Concurrent code
+
+The Par monad enables you to make explicit which parts of your code would benefit from being run in parallel. The model supported by Par allows you to write code using both the futures model and the dataflow parallelism approach. Then, a scheduler takes care of running your code using parallel threads. Par is a very powerful abstraction, because you don’t need to take care of managing creation and destruction of threads: just let the library do what it does.
+
+In some cases, though, several parallel tasks need to share resources in a way not expressible using Par. For example, several threads, may access the database at the same time. In those scenarios, ensuring that the resources are accessed concurrently in the right way is essential. Haskell features Software Transactional Memory as the way to control this behavior, using the idea of transactions brought from database systems.
+
+Finally, you may want to split the computation between several nodes that are distributed across a network. Cloud Haskell is appropriate in that situation. The Cloud Haskell package uses the Actor model for communication between nodes and enables sending and receiving both data and code.
+
+### Parallelism, Concurrency, Distribution
+
+Concurrency is a programming model where the computation is designed as several, mostly independent, threads of control. The system may either interweave the computations or run them in parallel, but in any case the illusion is that all of them work asynchronously. One archetypal example of a concurrent application is a web server: many clients request services at the same time, and from the programmers’ point of view, each of these requests is independent and happens asynchronously.
+In most cases, those threads need access to some shared resource. At this point, one has to ensure that concurrent access does not leave the system in an inconsistent way. For that purpose, many programming techniques have been developed, including locks, semaphores, or channels. In the case of Haskell, a model called Software Transactional Memory (STM).
+
+Parallelism, on the other hand, refers to a way of executing code in more than one computer core at once. Concurrent tasks are often run in parallel to achieve much better performance. Haskell has the perfect fit for parallelism: pure computations can’t interfere with each other, and their data dependencies are completely explicit. The Par monad, which shall be introduced later, follows this line of thought and enables parallelism for tasks.
+
+In many cases, the confusion between parallelism and concurrency comes from languages with side effects. In languages such as Java or C, any piece of code may access and change global state. For that reason, any amount of parallelism must also take care of the access to those shared resources and thus is required of the techniques of concurrent programming. You cannot really separate both of them in that context.
+
+Parallel programming is usually associated with running tasks in different cores (microprocessors or GPUs)
+in the same computer system. But the work can also be split between different computers that communicate
+across a network. In that case one speaks about distributed programming. Since each of the actors in the system
+is independent from any other, coordination of tasks must happen in a different way to one-system parallel programming. Furthermore, communication through a network imposes constraints in case of failure or big latency. For all these reasons, distributed programming needs other techniques. In Haskell the distributed-process package provides a distributed programming environment. This package is part of the Cloud Haskell project, and it’s heavily influenced by the Erlang programming language. In particular, it uses Erlang’s actor model to orchestrate the interactions between different systems in the network.
+
 # Book source code
 
 https://github.com/apress/beg-haskell
@@ -833,6 +855,6 @@ https://github.com/apress/beg-haskell
 
 # Upto
 
-Page 184
+Page 185
 
-Chapter 8
+The Par Monad
