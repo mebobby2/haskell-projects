@@ -853,6 +853,9 @@ https://github.com/apress/beg-haskell
 
 * Heterogeneous - incommensurable through being of different kinds, degrees, or dimensions. E.g. An array containing two or more different types
 
+* Natural numbers - the positive integers (whole numbers) 1, 2, 3, etc., and sometimes zero as well.
+
+
 # Upto
 
 Page 185
