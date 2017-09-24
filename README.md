@@ -839,6 +839,16 @@ in the same computer system. But the work can also be split between different co
 across a network. In that case one speaks about distributed programming. Since each of the actors in the system
 is independent from any other, coordination of tasks must happen in a different way to one-system parallel programming. Furthermore, communication through a network imposes constraints in case of failure or big latency. For all these reasons, distributed programming needs other techniques. In Haskell the distributed-process package provides a distributed programming environment. This package is part of the Cloud Haskell project, and it’s heavily influenced by the Erlang programming language. In particular, it uses Erlang’s actor model to orchestrate the interactions between different systems in the network.
 
+## spawnP
+```
+spawnP :: NFData a => a -> Par (IVar a)
+```
+The purpose of spawnP is just running a computation in parallel with the rest of the program. However, there
+are three things to notice from that signature. First of all, it requires the computation to be run to have a type supporting the NFData type class. If you remember, this is a type found in the deepseq package, which ensures that the computation is fully evaluated. spawnP imposes this constraint, because it’s the only way to ensure that the code will be actually run in parallel. If that constraint wasn’t there, the lazy evaluation model may make it run at any other time, losing the benefit of parallelism. Since the use of spawnP fully determines when some computation will be executed, the parallel model of monad-par is called deterministic.
+
+The second thing you may notice is that the result is wrapped inside Par. This type is the monad in which parallelism is run. Finally, instead of just a value, the result of spawnP is an IVar. An IVar is a future, a promise that the result of the computation will be available when requested. In order to get the result of the computation inside an IVar, you must call the get function. This function returns immediately if the computation has finished, or blocks execution until the result is available. This is the same model used in Scala or in the Parallel Task Library in C#.
+
+
 # Book source code
 
 https://github.com/apress/beg-haskell
@@ -858,6 +868,8 @@ https://github.com/apress/beg-haskell
 
 # Upto
 
-Page 185
+Page 187
 
-The Par Monad
+Following these steps does not immediately result in parallel tasks being created
+
+Also, need to add monad-par to cabal dependencies
