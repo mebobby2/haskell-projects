@@ -870,6 +870,4 @@ https://github.com/apress/beg-haskell
 
 Page 187
 
-Following these steps does not immediately result in parallel tasks being created
-
-Also, need to add monad-par to cabal dependencies
+Dataflow Parallelism with IVars
