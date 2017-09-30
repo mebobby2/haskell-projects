@@ -748,6 +748,17 @@ This is more readable than its corresponding translation:
 f >>= (\x -> g >> (h x -> (\y -> return y)))
 ```
 
+## Monad Context
+```
+Just 9 >>= \x -> return (x*10)
+```
+The above code returns ```Just 90```.
+
+How does Haskell know to lift the number 90 into the Maybe monad?
+Just walk the line: ```>>=``` takes a monad, unwraps it, pass the unwrapped value into the function, and expects the function to give back the result wrapped in the same monad context. The wrapping of the result into a monad context is done using ```return```. But how does the return know to wrap the result into the Maybe monad. It's easy, because the function that ```>>=``` takes has a return type of ```Maybe Integer```, so Haskell knows to invoke the ```return``` function on the Maybe monad.
+
+```(>>=) :: (Monad m) => m a -> (a -> m b) -> m b```
+
 ## Lambda with no arguments
 In haskell, there are no such thing as lambdas with no arguments. E.g.
 ```
