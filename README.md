@@ -839,6 +839,8 @@ in the same computer system. But the work can also be split between different co
 across a network. In that case one speaks about distributed programming. Since each of the actors in the system
 is independent from any other, coordination of tasks must happen in a different way to one-system parallel programming. Furthermore, communication through a network imposes constraints in case of failure or big latency. For all these reasons, distributed programming needs other techniques. In Haskell the distributed-process package provides a distributed programming environment. This package is part of the Cloud Haskell project, and it’s heavily influenced by the Erlang programming language. In particular, it uses Erlang’s actor model to orchestrate the interactions between different systems in the network.
 
+Uou should be aware of the fact that code using concurrency is considered side-effect code. When several threads are executing asynchronously and sharing resources, the order in which they do this affects the observable outcome. In contrast, in pure code the order in which functions are evaluated is irrelevant, because the result will be the same.
+
 ## spawnP
 ```
 spawnP :: NFData a => a -> Par (IVar a)
@@ -868,6 +870,6 @@ https://github.com/apress/beg-haskell
 
 # Upto
 
-Page 191
+Page 193
 
-Software Transactional Memory
+Atomic Transactions
