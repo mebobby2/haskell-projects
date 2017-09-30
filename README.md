@@ -868,6 +868,6 @@ https://github.com/apress/beg-haskell
 
 # Upto
 
-Page 187
+Page 191
 
-Dataflow Parallelism with IVars
+Software Transactional Memory
