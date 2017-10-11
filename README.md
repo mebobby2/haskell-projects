@@ -881,6 +881,6 @@ https://github.com/apress/beg-haskell
 
 # Upto
 
-Page 193
+Page 197
 
-Atomic Transactions
+Cloud Haskell
