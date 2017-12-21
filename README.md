@@ -861,6 +861,14 @@ are three things to notice from that signature. First of all, it requires the co
 
 The second thing you may notice is that the result is wrapped inside Par. This type is the monad in which parallelism is run. Finally, instead of just a value, the result of spawnP is an IVar. An IVar is a future, a promise that the result of the computation will be available when requested. In order to get the result of the computation inside an IVar, you must call the get function. This function returns immediately if the computation has finished, or blocks execution until the result is available. This is the same model used in Scala or in the Parallel Task Library in C#.
 
+## Automatic Currying
+Currying is turning a function of N arity into N functions that each take one of the original arguments. Haskell functions are automatically curried.
+
+Also, the space operator in Haskell is the function application operator.
+
+So, let's say we have a function, ```f```, that takes 3 arguments: ```f a b c```. Haskell interprets this as apply argument ```a``` to function ```f```, and then apply argument ```b``` to the function returned from ```f```, and then finally, apply the argument ```c``` to the function returned from that.
+
+Therefore, although ```f a b c``` looks like it's doing full function application, it is actually doing partial application one argument at a time due to automatic currying of functions.
 
 # Book source code
 
