@@ -889,6 +889,6 @@ https://github.com/apress/beg-haskell
 
 # Upto
 
-Page 197
+Page 205
 
-Cloud Haskell
+Chapter 9
